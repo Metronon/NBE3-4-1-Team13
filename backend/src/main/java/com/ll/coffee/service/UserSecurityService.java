@@ -1,7 +1,7 @@
 package com.ll.coffee.service;
 
 import com.ll.coffee.repository.UserRepository;
-import com.ll.coffee.user.SiteUser;
+import com.ll.coffee.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,11 +27,11 @@ public class UserSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<SiteUser> user = userRepository.findByUsername(username);
-        if(user.isPresent()) {
+        Optional<Member> user = userRepository.findByUsername(username);
+        if(user.isEmpty()) {
             throw new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
         }
-        SiteUser siteUser = user.get();
+        Member siteUser = user.get();
         List<GrantedAuthority> authorities = new ArrayList<>();
         if("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));

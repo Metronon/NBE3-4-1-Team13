@@ -1,4 +1,4 @@
-package com.ll.coffee.user;
+package com.ll.coffee.member;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class SiteUser {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
