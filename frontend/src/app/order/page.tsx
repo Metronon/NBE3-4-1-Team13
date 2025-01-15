@@ -1,4 +1,5 @@
-import "./page.css"
+import React from "react";
+import "./page.css";
 import ClientPage from "./ClientPage";
 
 export default function Home() {
