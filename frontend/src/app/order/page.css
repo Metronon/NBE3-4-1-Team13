@@ -1,81 +1,206 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
+    width: 100%;
 }
 
 .container {
     display: flex;
+    gap: 10px;
+    height: calc(100vh - 80px); /* 네비게이션 바 높이 제외 */
+    overflow: hidden;
+    width: 100%;
+}
+
+.product-list,
+.order-list {
+    border-radius: 20px;
+    display: flex;
     flex-direction: column;
-    height: 90vh;
+    margin: 10px 5px;
+    overflow: hidden;
+    padding: 15px;
 }
 
 .product-list {
-    width: 66.66%;
-    flex: 3;
-    background-color: bisque;
-    border-radius: 15px;
-    padding: 20px 10px;
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+    background-color: #e7e8e4;
+    flex: 2;
 }
 
 .order-list {
-    width: 33.33%;
-    flex: 2;
-    flex-direction: row;
-    border-radius: 15px;
-    background-color: green;
-    padding: 20px 10px;
-    margin: 20px;
+    background-color: grey;
+    flex: 1;
+    flex-grow: 1; /* 브라우저 크기에 따라 확장 */
+}
+
+.order-detail {
+    background-color: #cfae90;
+    border-radius: 10px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     gap: 20px;
-    overflow: hidden;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.order-item {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px; /* 각 항목 사이에 간격 추가 */
+}
+
+.order-item img {
+    border-radius: 5px;
+    height: auto;
+    width: 75px;
+}
+
+.order-item-info {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    font-size: 25px;
+    justify-content: center;
+}
+
+.order-price,
+.order-quantity {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: auto;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.order-total {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: inline-block;
+    flex-grow: 1;
+    font-weight: bold;
+    margin-left: auto;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.order-info {
+    align-items: center;
+    background-color: #78eefb;
+    border-radius: 10px;
+    font-size: 32px;
+    justify-content: space-between;
+    padding: 15px;
+    position: relative;
+}
+
+.order-info input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+}
+
+.order-info button {
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 15px;
+    width: 100%;
+}
+
+/* input 필드 클릭(포커스) 시 스타일 */
+.order-info input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
 }
 
 .product-details {
-    display: flex;
     align-items: center;
-    gap: 20px;
     border-bottom: 1px solid #ccc;
+    display: flex;
+    gap: 20px;
     padding: 20px 0;
 }
 
 .product-img {
-    width: 35%;
+    border-radius: 10px;
     max-width: 150px;
+    width: 35%;
 }
 
 .product-info {
     display: flex;
+    flex: 2;
     flex-direction: column;
-    align-items:flex-end;
     gap: 10px;
+}
+
+.product-category {
+    font-size: 18px;
+}
+
+.product-name {
+    font-size: 30px;
+}
+
+.product-price {
+    font-size: 20px;
+}
+
+.notice-msg {
+    font-size: 18px;
 }
 
 .quantity-control {
+    align-items: center;
     display: flex;
-    align-items:flex-end;
     gap: 10px;
+    margin-left: auto;
 }
 
 .quantity-input {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    appearance: none;
-    align-items:flex-end;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-align: center;
 }
 
-.decrease-button, .increase-button {
+.decrease-button,
+.increase-button {
+    align-items: center;
     background-color: brown;
+    border: none;
+    border-radius: 50%;
     color: white;
-    border-radius: 10%;
-    padding: 10px 15px;
-    margin: 10px;
     cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
 }
