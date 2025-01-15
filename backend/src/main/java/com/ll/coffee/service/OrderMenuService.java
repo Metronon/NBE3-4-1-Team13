@@ -3,15 +3,21 @@ package com.ll.coffee.service;
 import com.ll.coffee.OrderMenu.OrderMenu;
 import com.ll.coffee.OrderMenu.OrderMenuDto;
 import com.ll.coffee.repository.OrderMenuRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author shbaek
+ * @since 25. 1. 15
+ */
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class OrderMenuService {
     private final OrderMenuRepository orderMenuRepository;
