@@ -1,81 +1,166 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
+  width: 100%;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 90vh;
+  display: flex;
+  height: calc(100vh - 80px); /* 네비게이션 바 높이 제외 */
+  width: 100%;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.product-list,
+.order-list {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 10px 5px;
+  overflow: hidden;
 }
 
 .product-list {
-    width: 66.66%;
-    flex: 3;
-    background-color: bisque;
-    border-radius: 15px;
-    padding: 20px 10px;
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+  flex: 2;
+  background-color: skyblue;
 }
 
 .order-list {
-    width: 33.33%;
-    flex: 2;
-    flex-direction: row;
-    border-radius: 15px;
-    background-color: green;
-    padding: 20px 10px;
-    margin: 20px;
-    gap: 20px;
-    overflow: hidden;
+  flex: 1;
+  background-color: grey;
+}
+
+.order-detail {
+  background-color: green;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  gap: 20px;
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px; /* 각 항목 사이에 간격 추가 */
+}
+
+.order-item img {
+  width: 75px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: row;
+  font-size: 25px;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.order-price,
+.order-quantity {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+}
+
+.order-total {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.order-info {
+  background-color: yellow;
+  border-radius: 10px;
+  padding: 15px;
+  flex: 2;
+  flex-direction: row;
+  font-size: 32px;
+  justify-content: center;
+}
+
+.order-info input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* input 필드 클릭 시 스타일 */
+.order-info input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
 
 .product-details {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-bottom: 1px solid #ccc;
-    padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
 }
 
 .product-img {
-    width: 35%;
-    max-width: 150px;
+  width: 35%;
+  max-width: 150px;
+  border-radius: 10px;
 }
 
 .product-info {
-    display: flex;
-    flex-direction: column;
-    align-items:flex-end;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  flex-grow: 1;
 }
 
 .quantity-control {
-    display: flex;
-    align-items:flex-end;
-    gap: 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-left: auto;
 }
 
 .quantity-input {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    appearance: none;
-    align-items:flex-end;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  align-items: flex-end;
 }
 
-.decrease-button, .increase-button {
-    background-color: brown;
-    color: white;
-    border-radius: 10%;
-    padding: 10px 15px;
-    margin: 10px;
-    cursor: pointer;
+.decrease-button,
+.increase-button {
+  background-color: brown;
+  color: white;
+  border-radius: 10%;
+  padding: 10px 15px;
+  margin: 10px;
+  cursor: pointer;
 }
