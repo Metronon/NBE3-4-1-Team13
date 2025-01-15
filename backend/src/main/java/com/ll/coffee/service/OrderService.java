@@ -1,8 +1,7 @@
 package com.ll.coffee.service;
 
+import com.ll.coffee.OrderMenu.OrderMenu;
 import com.ll.coffee.order.Order;
-import com.ll.coffee.order.OrderMenu;
-import com.ll.coffee.order.OrderMenuId;
 import com.ll.coffee.repository.OrderMenuRepository;
 import com.ll.coffee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderMenuRepository orderMenuRepository;
 
-    public Order save(String email, String address, int postalCode, Map<Integer, Integer> orders) {
+    /**
+     * Order, OrderMenu 테이블 데이터 저장
+     *
+     * @author shbaek
+     * @since 25. 1. 15
+     */
+    public Order save(String email, String address, int postalCode, Map<Long, Integer> orders) {
         Order order = new Order();
         order.setEmail(email);
         order.setAddress(address);
@@ -31,15 +36,11 @@ public class OrderService {
 
         Order saveOrder = orderRepository.save(order);
 
-        // getid 따로
-
         orders.forEach((menuId, count) -> {
-            OrderMenu orderMenu = new OrderMenu();
-            OrderMenuId orderMenuId = new OrderMenuId();
-            orderMenuId.setOrderId(saveOrder.getId());
-            orderMenuId.setMenuId(menuId);
 
-            orderMenu.setId(orderMenuId);
+            OrderMenu orderMenu = new OrderMenu();
+            orderMenu.setOrderId(saveOrder.getId());
+            orderMenu.setMenuId(menuId);
             orderMenu.setCount(count);
 
             orderMenuRepository.save(orderMenu);
@@ -48,6 +49,12 @@ public class OrderService {
         return saveOrder;
     }
 
+    /**
+     * 가장 최근에 생성된 주문 조회
+     *
+     * @author shbaek
+     * @since 25. 1. 15
+     */
     public Optional<Order> findLatest() {
         return orderRepository.findFirstByOrderByIdDesc();
     }
