@@ -10,7 +10,7 @@ import java.util.Map;
  */
 @Getter
 public class OrderDto {
-    private int id;
+    private Long id;
     private String email;
     private String address;
     private int postalCode;
