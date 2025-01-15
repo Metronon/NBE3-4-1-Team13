@@ -17,3 +17,5 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+  springdoc:
+    default-produces-media-type: application/json;charset=UTF-8
