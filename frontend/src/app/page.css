@@ -1,0 +1,18 @@
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.product {
+    width: 45%;
+    max-width: 250px;
+    margin: 10px;
+    padding-top: 100px;
+}
+
+.product-info {
+    margin-top: 15px;
+    text-align: center;
+}
