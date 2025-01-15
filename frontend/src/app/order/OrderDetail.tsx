@@ -14,11 +14,11 @@ const OrderDetail = ({ filteredProducts }) => {
                     />
                     <div className="order-item-info">
                         <p>{product.name}</p>
-                        <span className="order-price">
-                            {product.price * product.quantity}원
-                        </span>
                         <span className="order-quantity">
                             {product.quantity}
+                        </span>
+                        <span className="order-price">
+                            {product.price * product.quantity}원
                         </span>
                     </div>
                 </div>
