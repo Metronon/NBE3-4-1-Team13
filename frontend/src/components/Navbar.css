@@ -1,0 +1,28 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .navbar-logo img {
+    height: 60px;
+    width: auto;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+  }
+  
+  .navbar-menu li {
+    margin-left: 20px;
+  }
+  
+  .navbar-menu a {
+    color: white;
+    text-decoration: none;
+  }
+  
