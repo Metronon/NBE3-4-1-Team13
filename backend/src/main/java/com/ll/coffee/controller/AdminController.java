@@ -1,7 +1,13 @@
 package com.ll.coffee.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.ll.coffee.OrderMenu.OrderMenuDto;
+import com.ll.coffee.service.OrderMenuService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  *
@@ -10,12 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author shjung
  * @since 25. 1. 14.
  */
-@Controller
+
+@RestController
+@AllArgsConstructor
 public class AdminController {
 
-    @RequestMapping("/order-menu")
-    public String orderMenu() {
-        // 나중에 맞는 템플릿 이름으로 변경
-        return "home";
+    private final OrderMenuService orderMenuService;
+
+    @GetMapping("/order-menu")
+    public ResponseEntity<List<OrderMenuDto>> getAllOrders() {
+        List<OrderMenuDto> orders = orderMenuService.getAllOrders();
+        return ResponseEntity.ok(orders);
     }
+
+
 }
