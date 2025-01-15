@@ -11,7 +11,7 @@ import java.util.Optional;
  * @author shbaek
  * @since 25. 1. 15
  */
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findFirstByOrderByIdDesc();
     Page<Order> findbyEmailContaining(String keyword, Pageable pageable);
     Page<Order> findAllByOrderByOrderTimeDesc(Pageable pageable);
