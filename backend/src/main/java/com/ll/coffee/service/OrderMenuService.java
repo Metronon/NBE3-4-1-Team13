@@ -28,6 +28,7 @@ public class OrderMenuService {
     private final OrderRepository orderRepository;
     private final MenuRepository menuRepository;
 
+    //관리자가 전체 주문을 조회하는 경우,
     public List<OrderMenuDto> getAllOrders() {
 
         //모든 주문 조회하기
@@ -40,7 +41,7 @@ public class OrderMenuService {
             List<MenuDataDto> menuDataList = new ArrayList<>();
             int totalPrice = 0;
 
-            // 해당 주문의 모든 주문 메뉴 정보 조회
+            // 현재 주문에 해당하는 메뉴 항목들을 조회
             List<OrderMenu> orderMenus = orderMenuRepository.findByOrderId(order.getId());
 
             for (OrderMenu orderMenu : orderMenus) {
@@ -48,7 +49,6 @@ public class OrderMenuService {
                 Optional<Menu> menuOptional = menuRepository.findById(orderMenu.getMenuId());
                 if (menuOptional.isPresent()) {
                     Menu menu = menuOptional.get();
-
 
                     // 메뉴 데이터 DTO로 변환
                     MenuDataDto menuDataDto = MenuDataDto.builder()
