@@ -2,12 +2,12 @@ package com.ll.coffee.service;
 
 import com.ll.coffee.OrderMenu.OrderMenu;
 import com.ll.coffee.OrderMenu.OrderMenuDto;
+import com.ll.coffee.repository.MenuRepository;
 import com.ll.coffee.repository.OrderMenuRepository;
-import lombok.AllArgsConstructor;
+import com.ll.coffee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,6 @@ import java.util.Map;
  * @since 25. 1. 15
  */
 @Service
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class OrderMenuService {
     private final OrderMenuRepository orderMenuRepository;
@@ -34,14 +33,15 @@ public class OrderMenuService {
 
         for(OrderMenu orderMenu : orderMenus){
 
-            Menu menu = menuRepository.findById(orderMenu.getMenuId()).orElseThrow(()-> new RuntimeException("Menu not found"));
+            /*Menu menu = menuRepository.findById(orderMenu.getMenuId()).orElseThrow(()-> new RuntimeException("Menu not found"));
 
             int itemPrice = menu.getPrice() * orderMenu.getCount();
             totalPrice +=itemPrice;
 
-            OrderMenuDto orderMenuDto = new OrderMenuDto(orderMenu.getMenuId(), orderMenu.getCount()   , menu.getName(), itemPrice );
+            OrderMenuDto orderMenuDto = new OrderMenuDto(orderMenu.getMenuId(), orderMenu.getCount()   , menu.getName(), itemPrice );*/
 
         }
 
+        return null;
     }
 }
