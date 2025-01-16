@@ -19,6 +19,7 @@ const OrderInfo = ({
                 placeholder="email을 입력해주세요"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
             />
             <h2>주소</h2>
             <input
@@ -26,6 +27,7 @@ const OrderInfo = ({
                 placeholder="주소를 입력해주세요"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                required
             />
             <h2>우편번호</h2>
             <input
@@ -33,11 +35,14 @@ const OrderInfo = ({
                 placeholder="우편번호를 입력해주세요"
                 value={postal}
                 onChange={(e) => setPostal(e.target.value)}
+                required
             />
             <div className="notice-msg">
                 당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.
             </div>
-            <span className="order-total">총 금액 {totalPrice}원</span>
+            <span className="order-total">
+                총 금액 {totalPrice.toLocaleString("en-US")}원
+            </span>
             <button type="button">결제하기</button>
         </div>
     );

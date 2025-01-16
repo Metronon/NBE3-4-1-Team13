@@ -24,18 +24,12 @@ const Navbar: React.FC = () => {
         toggleManagePopup();
     };
 
-    const handleOrderModify = (submittedEmail) => {
-        setEmail(submittedEmail);
-        console.log("주문 관리:", submittedEmail);
-        togglePopup();
-    };
-
     return (
         <>
             <nav className="navbar">
-                <Link href="/" className="navbar-logo">
+                <a href="/" className="navbar-logo">
                     <img src="/images/logo.png" alt="Logo" />
-                </Link>
+                </a>
                 <ul className="navbar-menu">
                     <li>
                         <a onClick={togglePopup}>주문 관리</a>

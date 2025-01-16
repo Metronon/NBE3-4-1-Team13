@@ -9,7 +9,7 @@ const ClientPage = () => {
     const [products, setProducts] = useState([
         {
             id: 1,
-            name: "커피콩1",
+            name: "Mocha",
             image: "images/product_1.png",
             price: 5000,
             quantity: 0,
@@ -17,7 +17,7 @@ const ClientPage = () => {
         },
         {
             id: 2,
-            name: "커피콩2",
+            name: "Blue Mountain",
             image: "images/product_2.png",
             price: 6000,
             quantity: 0,
@@ -25,7 +25,7 @@ const ClientPage = () => {
         },
         {
             id: 3,
-            name: "커피콩3",
+            name: "Havana",
             image: "images/product_3.png",
             price: 7000,
             quantity: 0,
@@ -33,7 +33,7 @@ const ClientPage = () => {
         },
         {
             id: 4,
-            name: "커피콩4",
+            name: "Um café",
             image: "images/product_4.png",
             price: 8000,
             quantity: 0,

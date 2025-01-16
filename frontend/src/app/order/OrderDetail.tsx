@@ -12,15 +12,14 @@ const OrderDetail = ({ filteredProducts }) => {
                         alt={product.name}
                         className="product-img"
                     />
-                    <div className="order-item-info">
-                        <p>{product.name}</p>
-                        <span className="order-quantity">
-                            {product.quantity}
-                        </span>
-                        <span className="order-price">
-                            {product.price * product.quantity}원
-                        </span>
-                    </div>
+                    <p className="order-item-name">{product.name}</p>
+                    <span className="order-quantity">{product.quantity}</span>
+                    <span className="order-price">
+                        {(product.price * product.quantity).toLocaleString(
+                            "en-US"
+                        )}{" "}
+                        원
+                    </span>
                 </div>
             ))}
         </div>

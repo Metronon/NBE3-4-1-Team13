@@ -20,7 +20,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000; /* 다른 요소들 위에 존재하도록 */
 }
 
 .popup-inner {
@@ -89,7 +89,7 @@ h1 {
 }
 
 .cancel-button {
-    background-color: #F78181;
+    background-color: #f78181;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 20px;
@@ -99,7 +99,7 @@ h1 {
 }
 
 .confirm-button {
-    background-color: #81BEF7;
+    background-color: #81bef7;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 20px;

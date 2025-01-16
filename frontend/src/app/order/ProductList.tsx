@@ -15,27 +15,29 @@ const ProductList = ({ products, updateQuantity }) => {
                     <div className="product-info">
                         <p className="product-category">{product.category}</p>
                         <h2 className="product-name">{product.name}</h2>
-                        <p className="product-price">{product.price}원</p>
-                        <div className="quantity-control">
-                            <button
-                                className="decrease-button"
-                                onClick={() => updateQuantity(product.id, -1)}
-                                disabled={
-                                    product.quantity === 0
-                                } /* 수량이 0일때 -버튼 비활성화 */
-                            >
-                                -
-                            </button>
-                            <span className="quantity-input">
-                                {product.quantity}
-                            </span>
-                            <button
-                                className="increase-button"
-                                onClick={() => updateQuantity(product.id, 1)}
-                            >
-                                +
-                            </button>
-                        </div>
+                        <p className="product-price">
+                            {product.price.toLocaleString("en-US")} 원
+                        </p>
+                    </div>
+                    <div className="quantity-control">
+                        <button
+                            className="decrease-button"
+                            onClick={() => updateQuantity(product.id, -1)}
+                            disabled={
+                                product.quantity === 0
+                            } /* 수량이 0일때 -버튼 비활성화 */
+                        >
+                            -
+                        </button>
+                        <span className="quantity-input">
+                            {product.quantity}
+                        </span>
+                        <button
+                            className="increase-button"
+                            onClick={() => updateQuantity(product.id, 1)}
+                        >
+                            +
+                        </button>
                     </div>
                 </div>
             ))}
