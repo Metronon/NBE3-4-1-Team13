@@ -28,7 +28,7 @@ public class MenuController {
     //메뉴 삭제
     @DeleteMapping("/{menu_id}")
     public void deleteMenu(@PathVariable Long menu_id) {
-        menuService.deleteMenu(menu_id);
+        menuService.deleteMenuById(menu_id);
     }
 
 

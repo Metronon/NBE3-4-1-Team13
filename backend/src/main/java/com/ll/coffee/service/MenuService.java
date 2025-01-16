@@ -32,7 +32,7 @@ public class MenuService {
         }
     }
 
-    public void deleteMenu(Long id) {
+    public void deleteMenuById(Long id) {
         if (menuRepository.existsById(id)) {
             menuRepository.deleteById(id);
         } else {
