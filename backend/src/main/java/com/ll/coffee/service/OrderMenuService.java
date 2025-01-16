@@ -3,60 +3,37 @@ package com.ll.coffee.service;
 import com.ll.coffee.OrderMenu.MenuDataDto;
 import com.ll.coffee.OrderMenu.OrderMenu;
 import com.ll.coffee.OrderMenu.OrderMenuDto;
+import com.ll.coffee.menu.Menu;
 import com.ll.coffee.order.Order;
 import com.ll.coffee.repository.MenuRepository;
 import com.ll.coffee.repository.OrderMenuRepository;
 import com.ll.coffee.repository.OrderRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author shbaek
  * @since 25. 1. 15
  */
 @Service
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class OrderMenuService {
+
     private final OrderMenuRepository orderMenuRepository;
     private final OrderRepository orderRepository;
     private final MenuRepository menuRepository;
 
-    public List<OrderMenuDto> getAllOrders(){
+    public List<OrderMenuDto> getAllOrders() {
 
-        List<OrderMenu> orderMenus = orderMenuRepository.findAll();
+        //모든 주문 조회하기
+        List<Order> orders = orderRepository.findAll();
 
-        //주문별로 메뉴 항목을 그룹화
-        Map<Integer, List<OrderMenuDto>> orderMenuMap = new HashMap<>();
-        int totalPrice = 0;
-
-        for(OrderMenu orderMenu : orderMenus){
-
-            Menu menu = menuRepository.findById(orderMenu.getMenuId()).orElseThrow(()-> new RuntimeException("Menu not found"));
-
-            int itemPrice = menu.getPrice() * orderMenu.getCount();
-            totalPrice +=itemPrice;
-
-            OrderMenuDto orderMenuDto = new OrderMenuDto(orderMenu.getMenuId(), orderMenu.getCount()   , menu.getName(), itemPrice );
-
-        }
-
-    }
-
-    /**
-     * email로 주문 조회
-     * @author shbaek
-     * @since 25. 1. 15
-     */
-    public List<OrderMenuDto> findByEmail(String email) {
-        List<Order> orders = orderRepository.findByEmail(email);
-
+        //주문 DTO 리스트 생성
         List<OrderMenuDto> orderMenuDtos = new ArrayList<>();
 
         for(Order order : orders){
@@ -68,9 +45,9 @@ public class OrderMenuService {
 
             for (OrderMenu orderMenu : orderMenus) {
                 // 메뉴 ID로 메뉴 정보 조회
-                Optional<com.ll.coffee.menu.Menu> menuOptional = menuRepository.findById(orderMenu.getMenuId());
+                Optional<Menu> menuOptional = menuRepository.findById(orderMenu.getMenuId());
                 if (menuOptional.isPresent()) {
-                    com.ll.coffee.menu.Menu menu = menuOptional.get();
+                    Menu menu = menuOptional.get();
 
 
                     // 메뉴 데이터 DTO로 변환
@@ -106,5 +83,7 @@ public class OrderMenuService {
         }
 
         return orderMenuDtos;
+
+
     }
 }

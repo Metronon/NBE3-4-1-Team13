@@ -10,13 +10,13 @@ import java.util.Map;
  */
 @Getter
 public class OrderDto {
-    private long id;
+    private Long id;
     private String email;
     private String address;
     private int postalCode;
-    private Map<Long, Integer> orders;
+    private Map<Integer, Integer> orders;
 
-    public OrderDto(Order order, Map<Long, Integer> orders) {
+    public OrderDto(Order order, Map<Integer, Integer> orders) {
         this.id = order.getId();
         this.email = order.getEmail();
         this.address = order.getAddress();
