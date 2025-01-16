@@ -51,8 +51,8 @@ public class MenuController {
     }
 
     @PutMapping("/{menu_id}")
-    public ResponseEntity<RsData<MenuDto>> updateMenu(@PathVariable Long id, @RequestBody Menu updateMenu) {
-        MenuDto updatedMenuDto = menuService.updateMenu(id, updateMenu);
+    public ResponseEntity<RsData<MenuDto>> updateMenu(@PathVariable Long menu_id, @RequestBody Menu updateMenu) {
+        MenuDto updatedMenuDto = menuService.updateMenu(menu_id, updateMenu);
 
         RsData<MenuDto> rsData = new RsData<>(
                 "200-1",
