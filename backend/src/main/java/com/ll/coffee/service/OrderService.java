@@ -6,6 +6,7 @@ import com.ll.coffee.order.OrderMenuId;
 import com.ll.coffee.repository.OrderMenuRepository;
 import com.ll.coffee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,4 +52,6 @@ public class OrderService {
     public Optional<Order> findLatest() {
         return orderRepository.findFirstByOrderByIdDesc();
     }
+
+
 }

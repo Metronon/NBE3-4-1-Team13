@@ -25,9 +25,9 @@
         <tr th:each=",loop : ${paging}">
             <td th:text="${paging.getTotalElements() - (paging.number * paging.size) - loop.index}"></td>
             <td>
-                <a th:href="@{|/order/detail/${order.order_id}|}" th:text="${order.memeber}"></a>
+                <a th:href="@{|/order/detail/${orderDto.email}}" th:text="${orderDto.email}"></a>
             </td>
-            <td th:text="${#temporals.format(.order_time,'yyyy-MM-DD HH:mm')}"></td>
+            <td th:text="${#temporals.format(orderMenuDto.orderTime,'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
@@ -51,7 +51,7 @@
             </li>
         </ul>
     </div>
-    <form th:action="@{/question/list}" method="get" id="searchForm">
+    <form th:action="@{/order/list}" method="get" id="searchForm">
         <input type="hidden" id="kw" name="kw" th:value="${kw}">
         <input type="hidden" id="page" name="page" th:value="${paging.number}">
     </form>
