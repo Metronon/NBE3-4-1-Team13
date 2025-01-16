@@ -8,7 +8,7 @@ const ClientPage = ({ onClose, onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(email); // 이메일 제출 시 부모 컴포넌트의 함수 호출
+        onSubmit(email); // 이메일 제출 시 부모 컴포넌트 함수 호출
     };
 
     return (
