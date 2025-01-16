@@ -35,6 +35,34 @@ const menuData = [
         menuPrice: 8000,
         category: "커피콩",
     },
+    {
+        menuId: 5,
+        menuName: "Mocha",
+        image: "images/product_1.png",
+        menuPrice: 5000,
+        category: "커피콩",
+    },
+    {
+        menuId: 6,
+        menuName: "Blue Mountain",
+        image: "images/product_2.png",
+        menuPrice: 6000,
+        category: "커피콩",
+    },
+    {
+        menuId: 7,
+        menuName: "Havana",
+        image: "images/product_3.png",
+        menuPrice: 7000,
+        category: "커피콩",
+    },
+    {
+        menuId: 8,
+        menuName: "Um café",
+        image: "images/product_4.png",
+        menuPrice: 8000,
+        category: "커피콩",
+    },
 ];
 
 const ClientPage = () => {
