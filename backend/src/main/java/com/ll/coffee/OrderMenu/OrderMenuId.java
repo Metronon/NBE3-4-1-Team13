@@ -1,11 +1,13 @@
 package com.ll.coffee.OrderMenu;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderMenuId implements Serializable {
 
     /*복합키를 사용하는 이유
@@ -14,8 +16,8 @@ public class OrderMenuId implements Serializable {
     * */
 
 
-    private Integer menuId;
-    private Integer orderId;
+    private Long menuId;
+    private Long orderId;
 
     // equals() 메서드: 두 복합키 객체가 동일한지 비교
     @Override
