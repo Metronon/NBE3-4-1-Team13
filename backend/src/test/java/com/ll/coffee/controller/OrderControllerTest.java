@@ -13,7 +13,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -66,6 +68,30 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("$.data.email").value(order.getEmail()))
                 .andExpect(jsonPath("$.data.address").value(order.getAddress()))
                 .andExpect(jsonPath("$.data.postalCode").value(order.getPostalCode()))
+        ;
+    }
+
+    @Test
+    @DisplayName("email로 주문 조회")
+    void t2() throws Exception {
+        String email = "test@test.com";
+
+        Order testOrder = orderService.save(email, "주소", 12345, Map.of(1L, 2, 2L, 1));
+
+        ResultActions resultActions = mvc
+                .perform(
+                        get("/order")
+                                .param("email", email)
+                )
+                .andDo(print());
+
+        resultActions
+                .andExpect(handler().handlerType(OrderController.class))
+                .andExpect(handler().methodName("getOrdersByEmail"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[-1].email").value(email))
+                .andExpect(jsonPath("$[-1].address").value("주소"))
+                .andExpect(jsonPath("$[-1].postalCode").value(12345))
         ;
     }
 }

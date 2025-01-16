@@ -1,19 +1,26 @@
 package com.ll.coffee.controller;
 
-import com.ll.coffee.OrderMenu.OrderMenuDto;
+import com.ll.coffee.OrderMenu.OrderMenuWithOrderDto;
 import com.ll.coffee.global.RsData;
+import com.ll.coffee.global.ServiceException;
+import com.ll.coffee.menu.Menu;
 import com.ll.coffee.order.Order;
 import com.ll.coffee.order.OrderDto;
+import com.ll.coffee.service.MenuService;
 import com.ll.coffee.service.OrderMenuService;
 import com.ll.coffee.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -27,11 +34,12 @@ import java.util.Map;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMenuService orderMenuService;
+    private final MenuService menuService;
 
     record OrderReqBody(
             @Email String email,
-            @NotNull String address,
-            @NotNull int postalCode,
+            @NotBlank @Length(min = 2) String address,
+            @NotNull @Min(1) int postalCode,
             @NotNull Map<Long, Integer> orders
     ) {
     }
@@ -39,6 +47,17 @@ public class OrderController {
     @PostMapping("/order")
     @Operation(summary = "주문 생성")
     public ResponseEntity<RsData<OrderDto>> create(@RequestBody @Valid OrderReqBody orderReqBody) {
+        orderReqBody.orders.forEach((menuId, count) -> {
+            Menu menu = menuService.getMenuById(menuId);
+
+            if (menuId == null) {
+                throw new ServiceException("400-2", "메뉴를 확인해주세요.");
+            }
+            if (count == null || count <= 0) {
+                throw new ServiceException("400-3", "메뉴 수량은 0보다 커야 합니다.");
+            }
+        });
+
         Order order = orderService.save(orderReqBody.email, orderReqBody.address, orderReqBody.postalCode, orderReqBody.orders);
 
         RsData<OrderDto> rsData = new RsData<>(
@@ -47,13 +66,17 @@ public class OrderController {
                 new OrderDto(order, orderReqBody.orders)
         );
 
-        return new ResponseEntity<>(rsData,HttpStatus.CREATED);
+        return new ResponseEntity<>(rsData, HttpStatus.CREATED);
     }
 
 
     @GetMapping("/order")
     @Operation(summary = "email로 주문 조회")
-    public List<OrderMenuDto> getOrdersByEmail(@RequestParam String email) {
-        return orderMenuService.findByEmail(email);
+    public List<OrderMenuWithOrderDto> getOrdersByEmail(@RequestParam String email) {
+        List<Order> orders = orderService.findByEmail(email);
+        if (orders.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "%s 에 해당하는 주문이 존재하지 않습니다.".formatted(email));
+        }
+        return orderMenuService.getOrdersByEmail(email);
     }
 }
