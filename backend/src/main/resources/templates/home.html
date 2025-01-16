@@ -31,7 +31,7 @@
             <td>
                 <a th:href="@{|/detail/${orderMenu.orderId}|}" th:text="${orderMenu.email}"></a>
             </td>
-            <td th:text="${#temporals.format(orderMenu.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(orderMenu.orderTime, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>

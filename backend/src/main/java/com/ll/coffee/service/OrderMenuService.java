@@ -155,13 +155,14 @@ public class OrderMenuService {
         return orderMenuWithOrderDtos;
     }
 
+
     //전체 주문 조회
-    public Page<OrderMenuDto> getOrderList(Pageable pageable, String kw){
+    public Page<OrderMenuWithOrderDto> getOrderList(Pageable pageable, String kw){
         Page<Order> orderPage = kw.trim().isEmpty() ?
                 orderRepository.findAll(pageable) :
                 orderRepository.findByEmailContaining(kw, pageable);
 
-        List<OrderMenuDto> orderMenuDtos = new ArrayList<>();
+        List<OrderMenuWithOrderDto> orderMenuWithOrderDtos = new ArrayList<>();
         for (Order order : orderPage.getContent()) {
             List<MenuDataDto> menuDataList = new ArrayList<>();
             int totalPrice = 0;
@@ -177,36 +178,36 @@ public class OrderMenuService {
                             .menuId(menu.getId())
                             .menuName(menu.getName())
                             .menuPrice(menu.getPrice())
-                            .count(orderMenu.getCount())
+                            .menuCount(orderMenu.getCount())
                             .build();
 
                     menuDataList.add(menuDataDto);
                     totalPrice += menu.getPrice() * orderMenu.getCount();
+                }
             }
+
+            LocalDateTime orderTime = order.getCreatedAt();
+            boolean isAfter2pm = orderTime.getHour() >= 14;
+
+            OrderMenuWithOrderDto orderMenuWithOrderDto = OrderMenuWithOrderDto.builder()
+                    .orderId(order.getId())
+                    .email(order.getEmail())
+                    .address(order.getAddress())
+                    .postalCode(order.getPostalCode())
+                    .menuData(menuDataList)
+                    .orderTime(orderTime)
+                    .isAfter2pm(isAfter2pm)
+                    .totalPrice(totalPrice)
+                    .build();
+
+            orderMenuWithOrderDtos.add(orderMenuWithOrderDto);
         }
-
-        LocalDateTime orderTime = order.getCreatedAt();
-        boolean isAfter2pm = orderTime.getHour() >= 14;
-
-        OrderMenuDto orderMenuDto = OrderMenuDto.builder()
-                .orderId(order.getId())
-                .menuData(menuDataList)
-                .orderTime(orderTime)
-                .isAfter2pm(isAfter2pm)
-                .totalPrice(totalPrice)
-                .build();
-
-        orderMenuDtos.add(orderMenuDto);
+        return new PageImpl<>(orderMenuWithOrderDtos, pageable, orderPage.getTotalElements());
     }
-        return new PageImpl<>(
-                orderMenuDtos,
-                pageable,
-                orderPage.getTotalElements()
-        );
-    }
+
 
     //상세 주문 출력
-    public OrderMenuDto getOrderById(Long id) {
+    public OrderMenuWithOrderDto getOrderById(Long id) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if(!orderOptional.isPresent()){
             throw new EntityNotFoundException("해당 주문을 찾을 수 없습니다.");
@@ -225,7 +226,7 @@ public class OrderMenuService {
                         .menuId(menu.getId())
                         .menuName(menu.getName())
                         .menuPrice(menu.getPrice())
-                        .count(orderMenu.getCount())
+                        .menuCount(orderMenu.getCount())
                         .build();
 
                 menuDataList.add(menuDataDto);
@@ -237,8 +238,11 @@ public class OrderMenuService {
         LocalDateTime orderTime = order.getCreatedAt();
         boolean isAfter2pm = orderTime.getHour() >= 14;
 
-        return OrderMenuDto.builder()
+        return OrderMenuWithOrderDto.builder()
                 .orderId(order.getId())
+                .email(order.getEmail())
+                .address(order.getAddress())
+                .postalCode(order.getPostalCode())
                 .menuData(menuDataList)
                 .orderTime(orderTime)
                 .isAfter2pm(isAfter2pm)

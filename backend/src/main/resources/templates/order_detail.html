@@ -1,8 +1,9 @@
 <html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}">
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 <div layout:fragment="content" class="container my-3">
     <!-- 주문자 -->
-    <h2 class="border-bottom py-2" th:text="${orderMenuDto.email}"></h2>
+    <h2 class="border-bottom py-2" th:text="${orderMenuWithOrderDto.email}"></h2>
     <!-- 주문 상세 내역 -->
     <div class="card mb-3">
         <div class="card-header bg-light">
@@ -20,32 +21,35 @@
                     </thead>
                     <tbody>
                     <!-- 메뉴 목록 -->
-                    <tr th:each="menu : ${orderMenuDto.menuData}">
+                    <tr th:each="menu : ${orderMenuWithOrderDto.menuData}">
                         <td th:text="${menu.menuName}"></td>
                         <td class="text-end" th:text="${#numbers.formatInteger(menu.menuPrice, 0, 'COMMA') + '원'}"></td>
-                        <td class="text-center" th:text="${menu.count + '개'}"></td>
+                        <td class="text-center" th:text="${menu.menuCount + '개'}"></td>
                     </tr>
                     <!-- 총액 행 -->
                     <tr class="table-secondary">
                         <td colspan="2" class="text-end fw-bold">총 주문금액</td>
                         <td class="text-end fw-bold"
-                            th:text="${#numbers.formatInteger(orderMenuDto.totalPrice, 0, 'COMMA') + '원'}"></td>
+                            th:text="${#numbers.formatInteger(orderMenuWithOrderDto.totalPrice, 0, 'COMMA') + '원'}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="d-flex justify-content-between mt-4">
                 <div class="mb-2">주문 시간</div>
-                <div th:text="${#temporals.format(orderMenuDto.orderTime, 'yyyy-MM-dd HH:mm')}"></div>
+                <div th:text="${#temporals.format(orderMenuWithOrderDto.orderTime, 'yyyy-MM-dd HH:mm')}"></div>
             </div>
             <div class="badge bg-light text-dark p-3">
                 <div class="mb-2">배송 예정</div>
                 <div>
-                    <span th:if="${!orderMenuDto.isAfter2pm}" class="text-primary">당일 배송</span>
-                    <span th:if="${orderMenuDto.isAfter2pm}" class="text-warning">다음날 배송</span>
+                    <span th:if="${!orderMenuWithOrderDto.isAfter2pm}" class="text-primary">당일 배송</span>
+                    <span th:if="${orderMenuWithOrderDto.isAfter2pm}" class="text-warning">다음날 배송</span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="text-center mt-3">
+        <a th:href="@{/list}" class="btn btn-secondary">주문 목록</a>
     </div>
 </div>
 </html>
