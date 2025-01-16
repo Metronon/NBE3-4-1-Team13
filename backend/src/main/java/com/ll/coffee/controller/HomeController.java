@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shjung
  * @since 25. 1. 13.
  */
-@RequestMapping("/admin")
 @RequiredArgsConstructor
 @Controller
 public class HomeController {
@@ -29,7 +29,6 @@ public class HomeController {
     public String home(){
         return "login_form";
     }
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/list")
     public String list(Model model,
@@ -44,10 +43,10 @@ public class HomeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/detail/{email}")
-    public String detail(Model model,
-                      ){
-
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Long id){
+        OrderMenuDto orderMenuDto = orderMenuService.getOrderById(id);
+        model.addAttribute("orderMenuDto", orderMenuDto);
         return "order_detail";
     }
 }

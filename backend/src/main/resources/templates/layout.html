@@ -9,6 +9,8 @@
 <body>
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
 <th:block layout:fragment="content"></th:block>
+<script th:src="@{/bootstrap.min.js}"></script>
+<th:block layout:fragment="script"></th:block>
 <script>//navbar 우측에 표시할 시계 관련함수
 function updateTime() {
     const now = new Date();
