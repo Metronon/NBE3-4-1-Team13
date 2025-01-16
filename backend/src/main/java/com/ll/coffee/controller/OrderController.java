@@ -20,7 +20,6 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +30,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/order")
 public class OrderController {
     private final OrderService orderService;
     private final OrderMenuService orderMenuService;
@@ -44,7 +44,7 @@ public class OrderController {
     ) {
     }
 
-    @PostMapping("/order")
+    @PostMapping
     @Operation(summary = "주문 생성")
     public ResponseEntity<RsData<OrderDto>> create(@RequestBody @Valid OrderReqBody orderReqBody) {
         orderReqBody.orders.forEach((menuId, count) -> {
@@ -70,13 +70,9 @@ public class OrderController {
     }
 
 
-    @GetMapping("/order")
+    @GetMapping
     @Operation(summary = "email로 주문 조회")
     public List<OrderMenuWithOrderDto> getOrdersByEmail(@RequestParam String email) {
-        List<Order> orders = orderService.findByEmail(email);
-        if (orders.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "%s 에 해당하는 주문이 존재하지 않습니다.".formatted(email));
-        }
         return orderMenuService.getOrdersByEmail(email);
     }
 }
