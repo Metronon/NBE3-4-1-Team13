@@ -59,7 +59,7 @@ public class OrderControllerTest {
         resultActions
                 .andExpect(handler().handlerType(OrderController.class))
                 .andExpect(handler().methodName("create"))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.resultCode").value("201-1"))
                 .andExpect(jsonPath("$.msg").value("%d번 주문이 완료되었습니다.".formatted(order.getId())))
                 .andExpect(jsonPath("$.data.id").value(order.getId()))

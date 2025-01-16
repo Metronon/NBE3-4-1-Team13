@@ -4,25 +4,26 @@
     padding: 10px 20px;
     background-color: #333;
     color: white;
-  }
-  
-  .navbar-logo img {
+}
+
+.navbar-logo img {
     height: 60px;
     width: auto;
-  }
-  
-  .navbar-menu {
+}
+
+.navbar-menu {
     display: flex;
+    font-size: 22px;
     list-style: none;
     margin-left: auto;
-  }
-  
-  .navbar-menu li {
+    gap: 15px;
+}
+
+.navbar-menu li {
     margin-left: 20px;
-  }
-  
-  .navbar-menu a {
+}
+
+.navbar-menu a {
     color: white;
     text-decoration: none;
-  }
-  
+}
