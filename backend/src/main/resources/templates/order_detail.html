@@ -3,26 +3,26 @@
 <!-- 주문 상세 내역 출력 -->
 <div layout:fragment="content" class="container my-3">
     <!-- 주문자 -->
-    <h2 class="border-bottom py-2" th:text="${.}"></h2>
+    <h2 class="border-bottom py-2" th:text="${orderDto.email}"></h2>
     <!-- 주문 상세 내역 -->
     <div class="my-3">
         <h4> 주문 상세 정보</h4>
-        <p>주문 번호: <span th:text="${.order_id}"</></p>
+        <p>주문 번호: <span th:text="${orderMenuDto.orderId}"</span></p>
         <h5>주문 내역</h5>
         <ul>
-           <li th:each="item :${.data}">
-               메뉴: <span th:text="${.menu_name}"></span>
-               수량: <span th:text=".count"></span>
+           <li th:each="menu :${orderMenuDto.data}">
+               메뉴: <span th:text="${menu.menu_name}"></span>
+               수량: <span th:text="${.count}"></span>
            </li>
         </ul>
-        <p>주문 시간: <span th:text="${.order_time}"</p>
-        <p>총액: <span th:text="${.total_price}"> </span>원</p>
+        <p>주문 시간: <span th:text="${orderMenuDto.order_time}"></span></p>
+        <p>총액: <span th:text="${orderMenuDto.total_price}"> </span>원</p>
         <p>
             배송 예정일:
-            <span th:if="$.is_after_2pm == false}">당일 배송</span>
-            <span th:if="${.is_after_2pm == true}">다음날 배송</span>
+            <span th:if="${!orderMenuDto.after2pm == true}">당일 배송</span>
+            <span th:if="${orderMenuDto.after2pm}">다음날 배송</span>
         </p>
         </div>
     </div>
-</div>
+<!-- 해당 이메일에 추가 주문 시 출력 -->
 </html>

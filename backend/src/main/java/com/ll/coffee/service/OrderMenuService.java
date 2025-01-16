@@ -2,12 +2,16 @@ package com.ll.coffee.service;
 
 import com.ll.coffee.OrderMenu.OrderMenu;
 import com.ll.coffee.OrderMenu.OrderMenuDto;
+import com.ll.coffee.menu.Menu;
+import com.ll.coffee.repository.MenuRepository;
 import com.ll.coffee.repository.OrderMenuRepository;
+import com.ll.coffee.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +46,10 @@ public class OrderMenuService {
             OrderMenuDto orderMenuDto = new OrderMenuDto(orderMenu.getMenuId(), orderMenu.getCount()   , menu.getName(), itemPrice );
 
         }
+
+    }
+
+    public Page<OrderMenuDto> getOrderList(PageRequest pageable, String kw) {
 
     }
 }
