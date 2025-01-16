@@ -5,10 +5,10 @@ import com.ll.coffee.order.Order;
 import com.ll.coffee.repository.OrderMenuRepository;
 import com.ll.coffee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,10 +37,10 @@ public class OrderService {
 
         Order saveOrder = orderRepository.save(order);
 
-        orders.forEach((menuId, count) -> {
+        OrderMenu orderMenu = new OrderMenu();
+        orderMenu.setOrderId(saveOrder.getId());
 
-            OrderMenu orderMenu = new OrderMenu();
-            orderMenu.setOrderId(saveOrder.getId());
+        orders.forEach((menuId, count) -> {
             orderMenu.setMenuId(menuId);
             orderMenu.setCount(count);
 
@@ -60,5 +60,7 @@ public class OrderService {
         return orderRepository.findFirstByOrderByIdDesc();
     }
 
-
+    public List<Order> findByEmail(String email) {
+        return orderRepository.findByEmail(email);
+    }
 }
