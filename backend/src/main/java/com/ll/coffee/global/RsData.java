@@ -27,6 +27,13 @@ public class RsData<T> {
         this(resultCode, msg, (T) new Empty());
     }
 
+    // 모든 필드를 받는 생성자
+    public RsData(@NonNull String resultCode, @NonNull String msg, @NonNull T data) {
+        this.resultCode = resultCode;
+        this.msg = msg;
+        this.data = data;
+    }
+
     @JsonIgnore
     public int getStatusCode() {
         return Integer.parseInt(resultCode.split("-")[0]);
