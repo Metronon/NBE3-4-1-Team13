@@ -55,7 +55,7 @@ public class OrderMenuService {
                             .menuId(menu.getId())
                             .menuName(menu.getName())
                             .menuPrice(menu.getPrice())
-                            .count(orderMenu.getCount())
+                            .menuCount(orderMenu.getCount())
                             .build();
 
 
@@ -116,7 +116,7 @@ public class OrderMenuService {
                             .menuId(menu.getId())
                             .menuName(menu.getName())
                             .menuPrice(menu.getPrice())
-                            .count(orderMenu.getCount())
+                            .menuCount(orderMenu.getCount())
                             .build();
 
 
