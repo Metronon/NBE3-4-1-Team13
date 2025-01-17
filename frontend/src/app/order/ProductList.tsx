@@ -13,7 +13,7 @@ const ProductList = ({ products, updateCount }) => {
                         className="product-img"
                     />
                     <div className="product-info">
-                        <p className="product-category">{product.category}</p>
+                        <p className="product-category">{product.menuType}</p>
                         <h2 className="product-name">{product.menuName}</h2>
                         <p className="product-price">
                             {product.menuPrice.toLocaleString("en-US")} 원
@@ -29,9 +29,7 @@ const ProductList = ({ products, updateCount }) => {
                         >
                             -
                         </button>
-                        <span className="quantity-input">
-                            {product.count}
-                        </span>
+                        <span className="quantity-input">{product.count}</span>
                         <button
                             className="increase-button"
                             onClick={() => updateCount(product.menuId, 1)}

@@ -20,7 +20,7 @@ public class AppConfig {
     }
 
     public static boolean isNotProd() {
-        return true;
+        return false;
     }
 
     public static String getSiteFrontUrl() {
