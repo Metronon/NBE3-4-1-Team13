@@ -61,6 +61,7 @@ public class OrderMenuService {
                             .menuId(menu.getId())
                             .menuName(menu.getName())
                             .menuPrice(menu.getPrice())
+                            .menuType(menu.getType())
                             .menuCount(orderMenu.getCount())
                             .build();
 

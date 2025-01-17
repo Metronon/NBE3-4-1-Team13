@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,5 +62,9 @@ public class MenuService {
                         menu.getType(),
                         menu.getPrice()))
                 .collect(Collectors.toList());
+    }
+
+    public void flush() {
+        menuRepository.flush();
     }
 }

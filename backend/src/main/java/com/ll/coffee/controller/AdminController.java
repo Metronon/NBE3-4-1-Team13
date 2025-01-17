@@ -3,6 +3,7 @@ package com.ll.coffee.controller;
 import com.ll.coffee.OrderMenu.OrderMenuDto;
 import com.ll.coffee.global.RsData;
 import com.ll.coffee.service.OrderMenuService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class AdminController {
     private final OrderMenuService orderMenuService;
 
     @GetMapping("/order-menu")
+    @Operation(summary = "전체 주문 조회")
     public ResponseEntity<RsData<List<OrderMenuDto>>> getAllOrders() {
         List<OrderMenuDto> orders = orderMenuService.getAllOrders();
 

@@ -15,31 +15,29 @@ package com.ll.coffee.controller;
 //import org.springframework.web.bind.annotation.RequestParam;
 //
 
-import com.ll.coffee.OrderMenu.OrderMenuDto;
 import com.ll.coffee.OrderMenu.OrderMenuWithOrderDto;
+import com.ll.coffee.menu.Menu;
 import com.ll.coffee.repository.OrderRepository;
+import com.ll.coffee.service.MenuService;
 import com.ll.coffee.service.OrderMenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 ///**
 // * @author shjung
 // * @since 25. 1. 13.
 // */
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class HomeController {
     private final OrderMenuService orderMenuService;
     private final OrderRepository orderRepository;
+    private final MenuService menuService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/list")
@@ -61,5 +59,24 @@ public class HomeController {
         model.addAttribute("orderMenuWithOrderDto", orderMenuWithOrderDto);
         return "/order_detail";
     }
+
+    //메뉴 수정(관리자)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/menu/{id}/modify")
+    public String showModifyPage(@PathVariable Long id, Model model) {
+
+        Menu menu = menuService.getMenuById(id);
+        model.addAttribute("menu", menu);
+        return "menu_modify";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/menu/{id}/edit")
+    public String modify(@PathVariable Long id, @ModelAttribute Menu menu){
+        menuService.updateMenu(id,menu);
+        return "redirect:/menu/list";
+    }
+
+
 }
 
