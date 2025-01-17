@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -135,7 +136,7 @@ public class OrderMenuService {
 
             // 4. 주문 시간과 오후 2시 이후 여부 계산
             LocalDateTime orderTime = order.getCreatedAt();
-            boolean isAfter2pm = orderTime.getHour() >= 14;
+            boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
 
             // 5. OrderMenuWithOrderDto 생성
             OrderMenuWithOrderDto orderMenuWithOrderDto = OrderMenuWithOrderDto.builder()
