@@ -11,12 +11,11 @@ import com.ll.coffee.repository.OrderMenuRepository;
 import com.ll.coffee.repository.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.security.core.parameters.P;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class OrderMenuService {
 
             // 4. 주문 시간과 오후 2시 이후 여부 계산
             LocalDateTime orderTime = order.getCreatedAt();
-            boolean isAfter2pm = orderTime.getHour() >= 14;
+            boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
 
             // 5. OrderMenuDto 생성
             OrderMenuDto orderMenuDto = OrderMenuDto.builder()
@@ -188,7 +187,7 @@ public class OrderMenuService {
             }
 
             LocalDateTime orderTime = order.getCreatedAt();
-            boolean isAfter2pm = orderTime.getHour() >= 14;
+            boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
 
             OrderMenuWithOrderDto orderMenuWithOrderDto = OrderMenuWithOrderDto.builder()
                     .orderId(order.getId())
@@ -237,7 +236,7 @@ public class OrderMenuService {
         }
 
         LocalDateTime orderTime = order.getCreatedAt();
-        boolean isAfter2pm = orderTime.getHour() >= 14;
+        boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
 
         return OrderMenuWithOrderDto.builder()
                 .orderId(order.getId())
