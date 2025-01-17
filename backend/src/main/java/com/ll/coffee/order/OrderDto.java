@@ -13,7 +13,7 @@ public class OrderDto {
     private Long id;
     private String email;
     private String address;
-    private int postalCode;
+    private String postalCode;
     private Map<Long, Integer> orders;
 
     public OrderDto(Order order, Map<Long, Integer> orders) {

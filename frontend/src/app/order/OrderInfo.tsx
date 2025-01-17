@@ -40,6 +40,13 @@ const OrderInfo = ({
             setPostalCodeError("우편번호를 작성해주세요");
             return;
         }
+        
+        // 우편번호란 자리수 확인
+        const postalCodePatter = /^\d{5}$/;
+        if (!postalCodePatter.test(postalCode)) {
+            setPostalCodeError("우편번호는 5자리 숫자여야 합니다.");
+            return;
+        }
 
         // 총 금액이 0원이 아닌지 확인
         if (totalPrice <= 0) {
