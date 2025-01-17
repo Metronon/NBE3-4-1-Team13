@@ -50,6 +50,7 @@ public class HomeController {
         return "/order_detail";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/menu_manage")
     public String menu_list(Model model){
         List<MenuDto> menus = menuService.getAllMenus();
@@ -58,12 +59,14 @@ public class HomeController {
         return "menu_list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/menu/add")
     public String add(Model model){
         model.addAttribute("menuDto",new Menu());
         return "menu_modify";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/menu/add")
     public String add(@Valid @ModelAttribute Menu menu, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -73,6 +76,7 @@ public class HomeController {
         return "redirect:/menu_manage";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/menu/{id}/delete")
     public String delete(@PathVariable Long id){
         menuService.deleteMenuById(id);
