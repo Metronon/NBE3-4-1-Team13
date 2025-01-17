@@ -17,13 +17,16 @@ public class MenuService {
     private final MenuRepository menuRepository;
 
     //메뉴생성
-    public MenuDto addMenu(Menu menu) {
-
-        Menu savedMenu = menuRepository.save(menu);
-        return new MenuDto(savedMenu.getId(), savedMenu.getName(), savedMenu.getType(), savedMenu.getPrice());
+    public MenuDto addMenu(MenuDto menu) {
+        Menu menuEntity = new Menu();
+        menuEntity.setName(menu.getName());
+        menuEntity.setPrice(menu.getPrice());
+        menuEntity.setType(menu.getType());
+        Menu savedMenu = menuRepository.save(menuEntity);
+        return new MenuDto();
     }
 
-    public MenuDto updateMenu(Long id, Menu updateMenu) {
+    public MenuDto updateMenu(Long id, MenuDto updateMenu) {
         //1.메뉴객체를 찾아서
         Menu menu = menuRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 메뉴가 존재하지 않습니다. id=" + id));
@@ -35,10 +38,6 @@ public class MenuService {
         Menu savedMenu = menuRepository.save(menu);
         //Dto로 변환하여 리턴
         return new MenuDto(
-                savedMenu.getId(),
-                savedMenu.getName(),
-                savedMenu.getType(),
-                savedMenu.getPrice()
         );
     }
 
@@ -57,15 +56,8 @@ public class MenuService {
     public List<MenuDto> getAllMenus() {
         List<Menu> menus = menuRepository.findAll();
         return menus.stream()
-                .map(menu -> new MenuDto(
-                        menu.getId(),
-                        menu.getName(),
-                        menu.getType(),
-                        menu.getPrice()))
+                .map(menu -> new MenuDto(menu.getId(), menu.getName(), menu.getType(), menu.getPrice()
+                ))
                 .collect(Collectors.toList());
-    }
-
-    public void flush() {
-        menuRepository.flush();
     }
 }

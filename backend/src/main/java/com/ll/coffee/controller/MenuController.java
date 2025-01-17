@@ -19,7 +19,7 @@ public class MenuController {
 
         // 메뉴 추가
         @PostMapping
-        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody Menu menu) {
+        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody MenuDto menu) {
             // 메뉴 추가 작업
             MenuDto menuDto = menuService.addMenu(menu); // MenuDto 리턴
 
@@ -50,7 +50,7 @@ public class MenuController {
     }
 
     @PutMapping("/{menu_id}")
-    public ResponseEntity<RsData<MenuDto>> updateMenu(@PathVariable Long menu_id, @RequestBody Menu updateMenu) {
+    public ResponseEntity<RsData<MenuDto>> updateMenu(@PathVariable Long menu_id, @RequestBody MenuDto updateMenu) {
         MenuDto updatedMenuDto = menuService.updateMenu(menu_id, updateMenu);
 
         RsData<MenuDto> rsData = new RsData<>(

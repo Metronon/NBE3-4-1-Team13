@@ -52,39 +52,39 @@ public class HomeController {
         return "/order_detail";
     }
 
-    @GetMapping("/menu_manage")
+    @GetMapping("/menu/manage")
     public String menu_list(Model model){
         List<MenuDto> menus = menuService.getAllMenus();
-        System.out.println("메뉴 목록: " + menus);
+
         model.addAttribute("menus",menus);
         return "menu_list";
     }
 
     @GetMapping("/menu/add")
     public String add(Model model){
-        model.addAttribute("menuDto",new Menu());
-        return "menu_modify";
+        model.addAttribute("menuDto",new MenuDto());
+        return "menu_add";
     }
 
     @PostMapping("/menu/add")
-    public String add(@Valid @ModelAttribute Menu menu, BindingResult bindingResult){
+    public String add(@Valid @ModelAttribute MenuDto menu, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "menu_modify";
+            return "menu_add";
         }
         menuService.addMenu(menu);
-        return "redirect:/menu_manage";
+        return "redirect:/menu/manage";
     }
 
     @GetMapping("/menu/{id}/delete")
     public String delete(@PathVariable Long id){
         menuService.deleteMenuById(id);
-        return "redirect:/menu_manage";
+        return "redirect:/menu/manage";
     }
 
     //메뉴 수정(관리자)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/menu/{id}/modify")
-    public String showModifyPage(@PathVariable Long id, Model model) {
+    @GetMapping("/menu/{id}/edit")
+    public String showModifyPage(@PathVariable Long id, Model model, MenuDto menuDto) {
 
         Menu menu = menuService.getMenuById(id);
         model.addAttribute("menu", menu);
@@ -92,10 +92,10 @@ public class HomeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/menu/{id}/edit")
-    public String modify(@PathVariable Long id, @ModelAttribute Menu menu){
+    @PostMapping("/menu/{id}/edit")
+    public String modify(@PathVariable Long id, @ModelAttribute MenuDto menu){
         menuService.updateMenu(id,menu);
-        return "redirect:/menu/list";
+        return "redirect:/menu/manage";
     }
 
     @GetMapping("/")

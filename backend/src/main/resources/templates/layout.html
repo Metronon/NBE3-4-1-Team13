@@ -4,26 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <script th:src="@{/bootstrap.min.js}"></script>
     <title>커피 시스템 관리</title>
 </head>
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
-<th:block layout:fragment="content"></th:block>
-<script th:src="@{/bootstrap.min.js}"></script>
-<th:block layout:fragment="script"></th:block>
-<script>//navbar 우측에 표시할 시계 관련함수
-function updateTime() {
-    const now = new Date();
-    const formatted = now.getFullYear() + '-' +
-        String(now.getMonth() + 1).padStart(2, '0') + '-' +
-        String(now.getDate()).padStart(2, '0') + ' ' +
-        String(now.getHours()).padStart(2, '0') + ':' +
-        String(now.getMinutes()).padStart(2, '0');
-    document.getElementById('current_time').textContent = formatted;
-}
+    <nav th:replace="~{navbar :: navbarFragment}"></nav>
+    <th:block layout:fragment="content"></th:block>
 
-setInterval(updateTime, 1000);
-window.onload = updateTime;
-</script>
+    <th:block layout:fragment="script"></th:block>
+    <script>//navbar 우측에 표시할 시계 관련함수
+    function updateTime() {
+        const now = new Date();
+        const formatted = now.getFullYear() + '-' +
+            String(now.getMonth() + 1).padStart(2, '0') + '-' +
+            String(now.getDate()).padStart(2, '0') + ' ' +
+            String(now.getHours()).padStart(2, '0') + ':' +
+            String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('current_time').textContent = formatted;
+    }
+
+    setInterval(updateTime, 1000);
+    window.onload = updateTime;
+    </script>
 </body>
 </html>

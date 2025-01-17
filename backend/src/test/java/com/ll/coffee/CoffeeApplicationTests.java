@@ -1,7 +1,6 @@
 package com.ll.coffee;
 
 import com.ll.coffee.member.Member;
-import com.ll.coffee.menu.Menu;
 import com.ll.coffee.menu.MenuDto;
 import com.ll.coffee.service.MenuService;
 import com.ll.coffee.service.UserService;
@@ -36,7 +35,7 @@ class CoffeeApplicationTests {
 	@DisplayName("메뉴 생성 서비스 테스트")
 	void addMenu() {
 
-			Menu menu = new Menu();
+			MenuDto menu = new MenuDto();
 			menu.setName("카푸치노");
 			menu.setType("커피");
 			menu.setPrice(5300);
@@ -80,7 +79,7 @@ class CoffeeApplicationTests {
 	@DisplayName("메뉴 수정 서비스 테스트")
 	void updateMenu() {
 		// given
-		Menu menu = new Menu();
+		MenuDto menu = new MenuDto();
 		menu.setName("뜨거운 아메리카노");
 		menu.setType("커피");
 		menu.setPrice(3000);
@@ -92,7 +91,7 @@ class CoffeeApplicationTests {
 		assertThat(menuDto.getName()).isEqualTo("뜨거운 아메리카노");
 		assertThat(menuDto.getPrice()).isEqualTo(3000);
 
-		Menu updateMenu = new Menu();
+		MenuDto updateMenu = new MenuDto();
 		updateMenu.setName("아이스 아메리카노");
 		updateMenu.setType("커피");
 		updateMenu.setPrice(3500);
