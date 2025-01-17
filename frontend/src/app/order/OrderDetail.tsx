@@ -15,9 +15,7 @@ const OrderDetail = ({ filteredProducts }) => {
                     <p className="order-item-name">{product.menuName}</p>
                     <span className="order-quantity">{product.count}</span>
                     <span className="order-price">
-                        {(product.menuPrice * product.count).toLocaleString(
-                            "en-US"
-                        )}{" "}
+                        {product.menuPrice * product.count}{" "}
                         원
                     </span>
                 </div>
