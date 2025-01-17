@@ -20,7 +20,6 @@ import java.util.List;
  * @author shjung
  * @since 25. 1. 14.
  */
-
 @RestController
 @AllArgsConstructor
 public class AdminController {

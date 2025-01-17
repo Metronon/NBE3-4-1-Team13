@@ -21,8 +21,8 @@
             <td class="text-end" th:text="${#numbers.formatInteger(menu.price, 0, 'COMMA') + '원'}"></td>
             <td class="text-center" th:text="${menu.type}"></td>
             <td class="text-end">
-                <a th:href="@{/menu/{id}/edit(id=${menu.id})}" class="btn btn-primary btn-sm">수정</a>
-                <a th:href="@{/menu/{id}/delete(id=${menu.id})}" class="btn btn-danger btn-sm">삭제</a>
+                <a th:href="@{|/menu/${menu.id}/edit|}" class="btn btn-primary btn-sm">수정</a>
+                <a th:href="@{|/menu/${menu.id}/delete|}" class="btn btn-danger btn-sm">삭제</a>
             </td>
         </tr>
         </tbody>

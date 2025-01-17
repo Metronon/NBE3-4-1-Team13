@@ -12,4 +12,8 @@ public class MenuDto {
     private String name;
     private String type;
     private Integer price;
+
+    public MenuDto() {
+
+    }
 }
