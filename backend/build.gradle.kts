@@ -27,6 +27,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation ("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
@@ -43,6 +44,7 @@ dependencies {
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.1")
+
 }
 
 tasks.withType<Test> {

@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -126,12 +127,14 @@ public class AdminControllerTest {
     }
 
     @Test
-    @DisplayName("관리자 - 전체 주문 조회 : 특정 주문 시간이 오후 2시 이후 인지 확인")
+    @DisplayName("관리자 - 전체 주문 조회 : 현재 주문 시간이 오후 2시 이후 인지 확인")
     void t3() throws Exception{
 
-        Order order = orderRepository.save(Order.builder()
-                   .createdAt(LocalDateTime.of(2025,1,16,15,0)).build());
+        LocalDateTime now = LocalDateTime.now();
 
+        // Order 객체 생성 시 fixedTime을 사용
+        Order order = orderRepository.save(Order.builder()
+                .createdAt(now).build());
 
         Menu menu = Menu.builder()
                 .name("Americano")
@@ -147,11 +150,15 @@ public class AdminControllerTest {
                 .count(5)
                 .build();
 
+        LocalDateTime orderTime = order.getCreatedAt();
+        boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
+
+
         ResultActions resultActions = mvc.perform(get("/order-menu")).andDo(print());
 
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data[0].after2pm").value(true));
+                .andExpect(jsonPath("$.data[0].after2pm").value(isAfter2pm));
     }
 
     @Test

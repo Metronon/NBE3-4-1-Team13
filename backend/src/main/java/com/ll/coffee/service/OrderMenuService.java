@@ -9,10 +9,16 @@ import com.ll.coffee.order.Order;
 import com.ll.coffee.repository.MenuRepository;
 import com.ll.coffee.repository.OrderMenuRepository;
 import com.ll.coffee.repository.OrderRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -130,7 +136,7 @@ public class OrderMenuService {
 
             // 4. 주문 시간과 오후 2시 이후 여부 계산
             LocalDateTime orderTime = order.getCreatedAt();
-            boolean isAfter2pm = orderTime.getHour() >= 14;
+            boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
 
             // 5. OrderMenuWithOrderDto 생성
             OrderMenuWithOrderDto orderMenuWithOrderDto = OrderMenuWithOrderDto.builder()
@@ -148,5 +154,100 @@ public class OrderMenuService {
         }
 
         return orderMenuWithOrderDtos;
+    }
+
+
+    //전체 주문 조회
+    public Page<OrderMenuWithOrderDto> getOrderList(Pageable pageable, String kw){
+        Page<Order> orderPage = kw.trim().isEmpty() ?
+                orderRepository.findAll(pageable) :
+                orderRepository.findByEmailContaining(kw, pageable);
+
+        List<OrderMenuWithOrderDto> orderMenuWithOrderDtos = new ArrayList<>();
+        for (Order order : orderPage.getContent()) {
+            List<MenuDataDto> menuDataList = new ArrayList<>();
+            int totalPrice = 0;
+
+            List<OrderMenu> orderMenus = orderMenuRepository.findByOrderId(order.getId());
+
+            for(OrderMenu orderMenu : orderMenus){
+                Optional<Menu> menuOptional = menuRepository.findById(orderMenu.getMenuId());
+                if(menuOptional.isPresent()){
+                    Menu menu = menuOptional.get();
+
+                    MenuDataDto menuDataDto = MenuDataDto.builder()
+                            .menuId(menu.getId())
+                            .menuName(menu.getName())
+                            .menuPrice(menu.getPrice())
+                            .menuCount(orderMenu.getCount())
+                            .build();
+
+                    menuDataList.add(menuDataDto);
+                    totalPrice += menu.getPrice() * orderMenu.getCount();
+                }
+            }
+
+            LocalDateTime orderTime = order.getCreatedAt();
+            boolean isAfter2pm = orderTime.getHour() >= 14;
+
+            OrderMenuWithOrderDto orderMenuWithOrderDto = OrderMenuWithOrderDto.builder()
+                    .orderId(order.getId())
+                    .email(order.getEmail())
+                    .address(order.getAddress())
+                    .postalCode(order.getPostalCode())
+                    .menuData(menuDataList)
+                    .orderTime(orderTime)
+                    .isAfter2pm(isAfter2pm)
+                    .totalPrice(totalPrice)
+                    .build();
+
+            orderMenuWithOrderDtos.add(orderMenuWithOrderDto);
+        }
+        return new PageImpl<>(orderMenuWithOrderDtos, pageable, orderPage.getTotalElements());
+    }
+
+
+    //상세 주문 출력
+    public OrderMenuWithOrderDto getOrderById(Long id) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        if(!orderOptional.isPresent()){
+            throw new EntityNotFoundException("해당 주문을 찾을 수 없습니다.");
+        }
+        Order order = orderOptional.get();
+        List<OrderMenu> orderMenus = orderMenuRepository.findByOrderId(order.getId());
+        List<MenuDataDto> menuDataList = new ArrayList<>();
+        int totalPrice = 0;
+        for (OrderMenu orderMenu : orderMenus) {
+            Optional<Menu> menuOptional = menuRepository.findById(orderMenu.getMenuId());
+
+            if (menuOptional.isPresent()) {
+                Menu menu = menuOptional.get();
+
+                MenuDataDto menuDataDto = MenuDataDto.builder()
+                        .menuId(menu.getId())
+                        .menuName(menu.getName())
+                        .menuPrice(menu.getPrice())
+                        .menuCount(orderMenu.getCount())
+                        .build();
+
+                menuDataList.add(menuDataDto);
+
+                totalPrice += menu.getPrice() * orderMenu.getCount();
+            }
+        }
+
+        LocalDateTime orderTime = order.getCreatedAt();
+        boolean isAfter2pm = orderTime.getHour() >= 14;
+
+        return OrderMenuWithOrderDto.builder()
+                .orderId(order.getId())
+                .email(order.getEmail())
+                .address(order.getAddress())
+                .postalCode(order.getPostalCode())
+                .menuData(menuDataList)
+                .orderTime(orderTime)
+                .isAfter2pm(isAfter2pm)
+                .totalPrice(totalPrice)
+                .build();
     }
 }
