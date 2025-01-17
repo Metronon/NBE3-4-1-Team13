@@ -34,7 +34,7 @@ body {
 }
 
 .order-list {
-    background-color: grey;
+    background-color: #a0c9f0;
     flex: 1;
     flex-grow: 1;
     padding: 15px;
