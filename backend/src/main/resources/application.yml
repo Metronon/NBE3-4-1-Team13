@@ -10,7 +10,9 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
-
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   jpa:
     properties:
       hibernate:
