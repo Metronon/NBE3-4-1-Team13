@@ -6,21 +6,20 @@ const OrderDetail = ({ filteredProducts }) => {
     return (
         <div className="order-detail">
             {filteredProducts.map((product) => (
-                <div key={product.id} className="order-item">
+                <div key={product.menuId} className="order-item">
                     <img
                         src={product.image}
-                        alt={product.name}
+                        alt={product.menuName}
                         className="product-img"
                     />
-                    <div className="order-item-info">
-                        <p>{product.name}</p>
-                        <span className="order-quantity">
-                            {product.quantity}
-                        </span>
-                        <span className="order-price">
-                            {product.price * product.quantity}원
-                        </span>
-                    </div>
+                    <p className="order-item-name">{product.menuName}</p>
+                    <span className="order-quantity">{product.count}</span>
+                    <span className="order-price">
+                        {(product.menuPrice * product.count).toLocaleString(
+                            "en-US"
+                        )}{" "}
+                        원
+                    </span>
                 </div>
             ))}
         </div>

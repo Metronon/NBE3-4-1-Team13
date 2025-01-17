@@ -1,51 +1,38 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import OrderDetail from "./OrderDetail";
 import OrderInfo from "./OrderInfo";
+import ConfirmPopup from "./ConfirmPopup";
 
 const ClientPage = () => {
-    const [products, setProducts] = useState([
-        {
-            id: 1,
-            name: "커피콩1",
-            image: "images/product_1.png",
-            price: 5000,
-            quantity: 0,
-            category: "커피콩",
-        },
-        {
-            id: 2,
-            name: "커피콩2",
-            image: "images/product_2.png",
-            price: 6000,
-            quantity: 0,
-            category: "커피콩",
-        },
-        {
-            id: 3,
-            name: "커피콩3",
-            image: "images/product_3.png",
-            price: 7000,
-            quantity: 0,
-            category: "커피콩",
-        },
-        {
-            id: 4,
-            name: "커피콩4",
-            image: "images/product_4.png",
-            price: 8000,
-            quantity: 0,
-            category: "커피콩",
-        },
-    ]);
+    const [products, setProducts] = useState([]);
 
-    const updateQuantity = (id: number, setQuantity: number) => {
+    useEffect(() => {
+        const fetchMenus = async () => {
+            try {
+                const response = await fetch('/api/menus'); // 백엔드 API 호출
+                const data = await response.json();
+                const formattedData = data.map((item) => ({
+                    ...item,
+                    image: `images/product_${item.menuId}.png`, // 이미지 파일명 설정
+                    count: 0, // 수량 초기화
+                }));
+                setProducts(formattedData);
+            } catch (error) {
+                console.error("메뉴를 가져오는 중 오류 발생:", error);
+            }
+        };
+
+        fetchMenus();
+    }, []);
+
+    const updateCount = (id: number, setCount: number) => {
         setProducts(
             products.map((product) =>
-                product.id === id
-                    ? { ...product, quantity: product.quantity + setQuantity }
+                product.menuId === id
+                    ? { ...product, count: product.count + setCount }
                     : product
             )
         );
@@ -53,22 +40,29 @@ const ClientPage = () => {
 
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
-    const [postal, setPostal] = useState("");
+    const [postalCode, setPostalCode] = useState("");
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
     const totalPrice = useMemo(
         () =>
             products.reduce(
-                (sum, product) => sum + product.price * product.quantity,
+                (sum, product) => sum + product.menuPrice * product.count,
                 0
             ),
         [products]
     );
 
-    const filteredProducts = products.filter((product) => product.quantity > 0);
+    const filteredProducts = products.filter((product) => product.count > 0);
+
+    const handleConfirm = () => {
+        console.log("결제 진행");
+        // 결제 로직 추가
+        setShowConfirmPopup(false);
+    };
 
     return (
         <div className="container">
-            <ProductList products={products} updateQuantity={updateQuantity} />
+            <ProductList products={products} updateCount={updateCount} />
             <div className="order-list">
                 <OrderDetail filteredProducts={filteredProducts} />
                 <OrderInfo
@@ -76,11 +70,18 @@ const ClientPage = () => {
                     setEmail={setEmail}
                     address={address}
                     setAddress={setAddress}
-                    postal={postal}
-                    setPostal={setPostal}
+                    postalCode={postalCode}
+                    setPostalCode={setPostalCode}
                     totalPrice={totalPrice}
+                    onConfirm={() => setShowConfirmPopup(true)}
                 />
             </div>
+            {showConfirmPopup && (
+                <ConfirmPopup
+                    onClose={() => setShowConfirmPopup(false)}
+                    onConfirm={handleConfirm}
+                />
+            )}
         </div>
     );
 };
