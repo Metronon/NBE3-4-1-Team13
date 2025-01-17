@@ -19,7 +19,7 @@ public class MenuController {
 
         // 메뉴 추가
         @PostMapping
-        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody MenuDto menu) {
+        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody Menu menu) {
             // 메뉴 추가 작업
             MenuDto menuDto = menuService.addMenu(menu); // MenuDto 리턴
 
