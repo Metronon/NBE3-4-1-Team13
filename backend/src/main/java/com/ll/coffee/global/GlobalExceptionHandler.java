@@ -82,4 +82,19 @@ public class GlobalExceptionHandler {
                 .status(rsData.getStatusCode())
                 .body(rsData);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<RsData<Empty>> handle(RuntimeException ex) {
+
+        if (AppConfig.isNotProd()) ex.printStackTrace();
+
+        String message = ex.getMessage();
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new RsData<>(
+                        "500-1",
+                        message
+                ));
+    }
 }

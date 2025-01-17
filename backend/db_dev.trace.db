@@ -31,6 +31,7 @@ Caused by: java.lang.AssertionError
 	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
 	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
 	... 13 more
+<<<<<<< HEAD
 2025-01-17 12:27:21.735715+09:00 database: flush
 org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/DevCourse_Project/1st/NBE3-4-1-Team13/backend/db_dev.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
@@ -1368,6 +1369,15 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/DevCourse_Pro
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 150 more
 2025-01-17 12:56:48.811141+09:00 database: close
+=======
+2025-01-17 09:15:37.755180+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM MEMBER MENU [*]ORDERS"; SQL statement:
+SELECT * FROM MEMBER MENU ORDERS [42000-232]
+2025-01-17 09:15:41.636594+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM MEMBER MENU [*]ORDERS ORDER_MENU"; SQL statement:
+SELECT * FROM MEMBER MENU ORDERS ORDER_MENU [42000-232]
+2025-01-17 11:37:34.088037+09:00 database: close
+>>>>>>> 70129d9a574342a0b4b2bc9bd0e3549d198df67b
 org.h2.message.DbException: IO Exception: "Closing" [90028-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.mvstore.db.Store.close(Store.java:374)
@@ -1400,7 +1410,11 @@ Caused by: java.lang.AssertionError
 	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
 	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
 	... 13 more
+<<<<<<< HEAD
 2025-01-17 14:08:10.721945+09:00 database: close
+=======
+2025-01-17 11:38:05.917049+09:00 database: close
+>>>>>>> 70129d9a574342a0b4b2bc9bd0e3549d198df67b
 org.h2.message.DbException: IO Exception: "Closing" [90028-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.mvstore.db.Store.close(Store.java:374)
@@ -1433,7 +1447,20 @@ Caused by: java.lang.AssertionError
 	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
 	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
 	... 13 more
+<<<<<<< HEAD
 2025-01-17 14:16:26.385026+09:00 database: close
+=======
+2025-01-17 11:39:47.521551+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete member [*]id = 1"; expected "., FROM"; SQL statement:
+delete member id = 1 [42001-232]
+2025-01-17 11:39:53.520901+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete from member id [*]= 1"; SQL statement:
+delete from member id = 1 [42000-232]
+2025-01-17 11:40:19.067811+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMGER" not found; SQL statement:
+DELETE FROM MEMGER WHERE ID = 1 [42102-232]
+2025-01-17 11:40:47.544082+09:00 database: close
+>>>>>>> 70129d9a574342a0b4b2bc9bd0e3549d198df67b
 org.h2.message.DbException: IO Exception: "Closing" [90028-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.mvstore.db.Store.close(Store.java:374)
@@ -1466,6 +1493,7 @@ Caused by: java.lang.AssertionError
 	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
 	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
 	... 13 more
+<<<<<<< HEAD
 2025-01-17 14:19:30.533337+09:00 database: flush
 org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/DevCourse_Project/1st/NBE3-4-1-Team13/backend/db_dev.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
@@ -1800,3 +1828,5 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/DevCourse_Pro
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 150 more
+=======
+>>>>>>> 70129d9a574342a0b4b2bc9bd0e3549d198df67b
