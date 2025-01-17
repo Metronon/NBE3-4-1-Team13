@@ -5,28 +5,27 @@ import ProductList from "./ProductList";
 import OrderDetail from "./OrderDetail";
 import OrderInfo from "./OrderInfo";
 import ConfirmPopup from "./ConfirmPopup";
+import type { components } from "@/lib/backend/apiV1/schema";
 
-const ClientPage = () => {
-    const [products, setProducts] = useState([]);
+const ClientPage = ({
+    responseBody,
+}: {
+    responseBody: components["schemas"]["MenuDataDto"][];
+}) => {
+    const [products, setProducts] = useState<
+        components["schemas"]["MenuDataDto"][]
+    >([]);
 
     useEffect(() => {
-        const fetchMenus = async () => {
-            try {
-                const response = await fetch('/api/menus'); // 백엔드 API 호출
-                const data = await response.json();
-                const formattedData = data.map((item) => ({
-                    ...item,
-                    image: `images/product_${item.menuId}.png`, // 이미지 파일명 설정
-                    count: 0, // 수량 초기화
-                }));
-                setProducts(formattedData);
-            } catch (error) {
-                console.error("메뉴를 가져오는 중 오류 발생:", error);
-            }
-        };
-
-        fetchMenus();
-    }, []);
+        const formattedData = responseBody.map((item) => ({
+            menuId: item.menuId,
+            menuName: item.menuName,
+            menuPrice: item.menuPrice,
+            image: `images/product_1.png`,
+            count: 0, // 초기화
+        }));
+        setProducts(formattedData);
+    }, [responseBody]);
 
     const updateCount = (id: number, setCount: number) => {
         setProducts(
