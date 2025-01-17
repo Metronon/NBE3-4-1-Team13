@@ -36,7 +36,7 @@ public class HomeController {
     public String list(Model model,
                        @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw) {
-        PageRequest pageable = PageRequest.of(page, 10, Sort.by("createdAt").descending());  // orderTime을 createdAt으로 변경
+        PageRequest pageable = PageRequest.of(page, 10, Sort.by("createdAt").descending());
         Page<OrderMenuWithOrderDto> paging = orderMenuService.getOrderList(pageable, kw);
 
         model.addAttribute("paging", paging);
@@ -53,7 +53,7 @@ public class HomeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/menu_manage")
+    @GetMapping("/menu/manage")
     public String menu_list(Model model){
         List<MenuDto> menus = menuService.getAllMenus();
         System.out.println("메뉴 목록: " + menus);
@@ -64,25 +64,25 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/menu/add")
     public String add(Model model){
-        model.addAttribute("menuDto",new Menu());
-        return "menu_modify";
+        model.addAttribute("menu",new Menu());
+        return "menu_form";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/menu/add")
     public String add(@Valid @ModelAttribute Menu menu, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "menu_modify";
+            return "menu_form";
         }
         menuService.addMenu(menu);
-        return "redirect:/menu_manage";
+        return "redirect:/menu/manage";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/menu/{id}/delete")
     public String delete(@PathVariable Long id){
         menuService.deleteMenuById(id);
-        return "redirect:/menu_manage";
+        return "redirect:/menu/manage";
     }
 
     //메뉴 수정(관리자)

@@ -5,8 +5,8 @@ border-bottom" xmlns:sec="http://www.w3.org/1999/xhtml">
             <img src="/images/coffee2.png" alt="coffee" width="120" height="40">
         </a>
         <div class="d-flex align-items-center ms-auto" id="navbarSupportedContent">
-            <a class="nav-link me-3" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃
-            </a>
+            <a class="btn btn-secondary btn-sm nav-link me-3" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+            <a class="btn btn-outline-primary btn-sm me-3" th:href="@{/menu/manage}">메뉴 관리</a>
             <span class="text-dark" id="current_time"></span>
         </div>
     </div>
