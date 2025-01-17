@@ -19,3 +19,16 @@ spring:
       ddl-auto: update
   springdoc:
     default-produces-media-type: application/json;charset=UTF-8
+  logging:
+    level:
+      springframework:
+        security: DEBUG
+      org.hibernate.SQL: DEBUG
+      org.hibernate.orm.jdbc.bind: TRACE
+      org.hibernate.orm.jdbc.extract: TRACE
+      org.springframework.transaction.interceptor: TRACE
+  custom:
+    jwt:
+      secretKey: abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789
+    accessToken:
+      expirationSeconds: "#{60*20}"

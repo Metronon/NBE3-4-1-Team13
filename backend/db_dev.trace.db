@@ -31,3 +31,9 @@ Caused by: java.lang.AssertionError
 	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
 	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
 	... 13 more
+2025-01-17 09:15:37.755180+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM MEMBER MENU [*]ORDERS"; SQL statement:
+SELECT * FROM MEMBER MENU ORDERS [42000-232]
+2025-01-17 09:15:41.636594+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM MEMBER MENU [*]ORDERS ORDER_MENU"; SQL statement:
+SELECT * FROM MEMBER MENU ORDERS ORDER_MENU [42000-232]
