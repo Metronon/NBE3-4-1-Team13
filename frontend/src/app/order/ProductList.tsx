@@ -16,16 +16,14 @@ const ProductList = ({ products, updateCount }) => {
                         <p className="product-category">{product.menuType}</p>
                         <h2 className="product-name">{product.menuName}</h2>
                         <p className="product-price">
-                            {product.menuPrice.toLocaleString("en-US")} 원
+                            {product.menuPrice.toLocaleString("ko-kr")} 원
                         </p>
                     </div>
                     <div className="quantity-control">
                         <button
                             className="decrease-button"
                             onClick={() => updateCount(product.menuId, -1)}
-                            disabled={
-                                product.count === 0
-                            } /* 수량이 0일때 -버튼 비활성화 */
+                            disabled={product.count === 0}
                         >
                             -
                         </button>
