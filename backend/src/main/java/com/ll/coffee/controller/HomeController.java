@@ -4,8 +4,6 @@ package com.ll.coffee.controller;
 import com.ll.coffee.OrderMenu.OrderMenuWithOrderDto;
 import com.ll.coffee.menu.Menu;
 import com.ll.coffee.menu.MenuDto;
-import com.ll.coffee.service.MenuService;
-import com.ll.coffee.menu.Menu;
 import com.ll.coffee.repository.OrderRepository;
 import com.ll.coffee.service.MenuService;
 import com.ll.coffee.service.OrderMenuService;
@@ -15,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ import java.util.List;
 // * @since 25. 1. 13.
 // */
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class HomeController {
     private final OrderMenuService orderMenuService;
     private final MenuService menuService;
@@ -101,6 +100,11 @@ public class HomeController {
     public String modify(@PathVariable Long id, @ModelAttribute Menu menu){
         menuService.updateMenu(id,menu);
         return "redirect:/menu/list";
+    }
+
+    @GetMapping("/")
+    public String home(Model model){
+        return "redirect:/login";
     }
 
 }
