@@ -103,6 +103,5 @@ public class HomeController {
         return "redirect:/menu/list";
     }
 
-
 }
 
