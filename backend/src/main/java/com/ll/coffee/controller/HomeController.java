@@ -1,23 +1,12 @@
 package com.ll.coffee.controller;
-//
-//import com.ll.coffee.OrderMenu.OrderMenuDto;
-//import com.ll.coffee.repository.OrderRepository;
-//import com.ll.coffee.service.OrderMenuService;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageRequest;
-//import org.springframework.data.domain.Sort;
-//import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
+
 
 import com.ll.coffee.OrderMenu.OrderMenuWithOrderDto;
-import com.ll.coffee.repository.OrderRepository;
+import com.ll.coffee.menu.Menu;
+import com.ll.coffee.menu.MenuDto;
+import com.ll.coffee.service.MenuService;
 import com.ll.coffee.service.OrderMenuService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,9 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 ///**
 // * @author shjung
@@ -37,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
     private final OrderMenuService orderMenuService;
-    private final OrderRepository orderRepository;
+    private final MenuService menuService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/list")
@@ -58,6 +48,35 @@ public class HomeController {
         OrderMenuWithOrderDto orderMenuWithOrderDto = orderMenuService.getOrderById(id);
         model.addAttribute("orderMenuWithOrderDto", orderMenuWithOrderDto);
         return "/order_detail";
+    }
+
+    @GetMapping("/menu_manage")
+    public String menu_list(Model model){
+        List<MenuDto> menus = menuService.getAllMenus();
+        System.out.println("메뉴 목록: " + menus);
+        model.addAttribute("menus",menus);
+        return "menu_list";
+    }
+
+    @GetMapping("/menu/add")
+    public String add(Model model){
+        model.addAttribute("menuDto",new Menu());
+        return "menu_modify";
+    }
+
+    @PostMapping("/menu/add")
+    public String add(@Valid @ModelAttribute Menu menu, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "menu_modify";
+        }
+        menuService.addMenu(menu);
+        return "redirect:/menu_manage";
+    }
+
+    @GetMapping("/menu/{id}/delete")
+    public String delete(@PathVariable Long id){
+        menuService.deleteMenuById(id);
+        return "redirect:/menu_manage";
     }
 }
 
