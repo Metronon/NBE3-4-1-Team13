@@ -1,10 +1,10 @@
-import "./page.css"
+import "./page.css";
 import ClientPage from "./ClientPage";
 
 export default function Home() {
-    return (
-        <div>
-            <ClientPage />
-        </div>
-    );
+  return (
+    <div>
+      <ClientPage />
+    </div>
+  );
 }
