@@ -1,7 +1,32 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="container my-3">
-    <form>
-
+    <h2>메뉴 수정</h2>
+    <form th:action="@{/menu/{id}/modify(id=${menu.id})}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="menuName" class="form-label">메뉴명</label>
+            <input type="text" id="menuName" name ="name" class="form-control" th:value="${menu.name}" required>
+            <div class="invalid-feedback">
+                 메뉴명을 입력해주세요.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="menuPrice" class="form-label">단가</label>
+            <input type="number" id="menuPrice" name="price" class="form-control" th:value="${menu.price}" required>
+            <div class="invalid-feedback">
+                 단가를 입력해주세요.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="menuType" class="form-label">타입</label>
+            <input type="text" id="menuType" name="type" class="form-control" th:value="${menu.type}" required>
+            <div class="invalid-feedback">
+                타입를 입력해주세요.
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary me-2">저장</button>
+            <a th:href="@{/menu/list}" class="btn btn-secondary">취소</a>
+        </div>
     </form>
 </div>
 </html>
