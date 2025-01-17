@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +17,11 @@ public class MenuService {
     private final MenuRepository menuRepository;
 
     //메뉴생성
-    public MenuDto addMenu(Menu menu) {
+    public MenuDto addMenu(MenuDto menuDto) {
+        Menu menu = new Menu();
+        menu.setName(menuDto.getName());
+        menu.setType(menuDto.getType());
+        menu.setPrice(menuDto.getPrice());
         Menu savedMenu = menuRepository.save(menu);
         return new MenuDto(savedMenu.getId(), savedMenu.getName(), savedMenu.getType(), savedMenu.getPrice());
     }
