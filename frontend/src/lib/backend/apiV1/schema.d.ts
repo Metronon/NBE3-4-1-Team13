@@ -382,7 +382,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["Menu"];
+                "application/json": components["schemas"]["MenuDto"];
             };
         };
         responses: {
