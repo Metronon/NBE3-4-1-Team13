@@ -4,7 +4,6 @@ import com.ll.coffee.global.RsData;
 import com.ll.coffee.menu.Menu;
 import com.ll.coffee.menu.MenuDto;
 import com.ll.coffee.service.MenuService;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public class MenuController {
 
         // 메뉴 추가
         @PostMapping
-        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody Menu menu) {
+        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody MenuDto menu) {
             // 메뉴 추가 작업
             MenuDto menuDto = menuService.addMenu(menu); // MenuDto 리턴
 
