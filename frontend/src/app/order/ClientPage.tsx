@@ -6,6 +6,7 @@ import OrderDetail from "./OrderDetail";
 import OrderInfo from "./OrderInfo";
 import ConfirmPopup from "./ConfirmPopup";
 import type { components } from "@/lib/backend/apiV1/schema";
+import client from "@/lib/backend/client";
 
 const ClientPage = ({
     responseBody,
@@ -15,12 +16,17 @@ const ClientPage = ({
     const [products, setProducts] = useState<
         components["schemas"]["MenuDataDto"][]
     >([]);
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [postalCode, setPostalCode] = useState("");
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
     useEffect(() => {
         const formattedData = responseBody.map((item) => ({
             menuId: item.menuId,
             menuName: item.menuName,
             menuPrice: item.menuPrice,
+            menuType: item.menuType,
             image: `images/product_1.png`,
             count: 0, // 초기화
         }));
@@ -37,11 +43,6 @@ const ClientPage = ({
         );
     };
 
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [postalCode, setPostalCode] = useState("");
-    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
-
     const totalPrice = useMemo(
         () =>
             products.reduce(
@@ -53,9 +54,31 @@ const ClientPage = ({
 
     const filteredProducts = products.filter((product) => product.count > 0);
 
-    const handleConfirm = () => {
-        console.log("결제 진행");
-        // 결제 로직 추가
+    // ConfirmPopup에서 "네"를 눌렀을때 POST 요청
+    const handleConfirm = async () => {
+        const orders: Record<number, number> = {};
+        filteredProducts.forEach((product) => {
+            orders[product.menuId] = product.count;
+        });
+
+        const requestBody = {
+            email,
+            address,
+            postalCode,
+            orders,
+        };
+
+        try {
+            console.log("test", requestBody);
+            const response = await client.POST("/order", {
+                body: requestBody, // requestBody를 body 속성에 전달
+            });
+            console.log("주문이 성공적으로 전송되었습니다:", response);
+        } catch (error) {
+            console.error("주문 전송 중 오류 발생:", error);
+            alert("주문 전송에 실패했습니다. 다시 시도해 주세요.");
+        }
+
         setShowConfirmPopup(false);
     };
 

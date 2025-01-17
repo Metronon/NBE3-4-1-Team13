@@ -7,6 +7,7 @@ import client from "@/lib/backend/client";
 interface Menu {
     menuId: number;
     menuName: string;
+    menuType: string;
     menuPrice: number;
 }
 
@@ -19,6 +20,7 @@ export default async function Page() {
         menuId: item.id,
         menuName: item.name,
         menuPrice: item.price,
+        menuType: item.type,
     }));
 
     return (
