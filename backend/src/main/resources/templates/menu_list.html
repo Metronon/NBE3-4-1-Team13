@@ -22,7 +22,9 @@
             <td class="text-center" th:text="${menu.type}"></td>
             <td class="text-end">
                 <a th:href="@{|/menu/${menu.id}/edit|}" class="btn btn-primary btn-sm">수정</a>
-                <a th:href="@{|/menu/${menu.id}/delete|}" class="btn btn-danger btn-sm">삭제</a>
+                <a href="javascript:void(0);" th:data-uri="@{|/menu/${menu.id}/delete|}"
+                   class="delete btn btn-danger btn-sm"
+                   th:text="삭제"></a>
             </td>
         </tr>
         </tbody>
@@ -31,4 +33,14 @@
         <a th:href="@{/list}" class="btn btn-secondary">주문 목록</a>
     </div>
 </div>
+<script layout:fragment="script" type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function (element) {
+        element.addEventListener('click', function () {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+</script>
 </html>
