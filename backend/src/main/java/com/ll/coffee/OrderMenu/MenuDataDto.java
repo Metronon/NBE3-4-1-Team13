@@ -12,5 +12,6 @@ public class MenuDataDto {
     private Long menuId;
     private String menuName;
     private int menuPrice;
+    private String menuType;
     private int menuCount;
 }

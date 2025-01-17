@@ -64,4 +64,8 @@ public class MenuService {
                         menu.getPrice()))
                 .collect(Collectors.toList());
     }
+
+    public void flush() {
+        menuRepository.flush();
+    }
 }
