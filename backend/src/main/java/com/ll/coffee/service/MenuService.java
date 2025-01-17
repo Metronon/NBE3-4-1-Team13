@@ -17,11 +17,8 @@ public class MenuService {
     private final MenuRepository menuRepository;
 
     //메뉴생성
-    public MenuDto addMenu(MenuDto menuDto) {
-        Menu menu = new Menu();
-        menu.setName(menuDto.getName());
-        menu.setType(menuDto.getType());
-        menu.setPrice(menuDto.getPrice());
+    public MenuDto addMenu(Menu menu) {
+
         Menu savedMenu = menuRepository.save(menu);
         return new MenuDto(savedMenu.getId(), savedMenu.getName(), savedMenu.getType(), savedMenu.getPrice());
     }
