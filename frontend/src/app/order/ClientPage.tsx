@@ -5,6 +5,7 @@ import ProductList from "./ProductList";
 import OrderDetail from "./OrderDetail";
 import OrderInfo from "./OrderInfo";
 import ConfirmPopup from "./ConfirmPopup";
+import OrderCompletePopup from "./OrderCompletePopup";
 import type { components } from "@/lib/backend/apiV1/schema";
 import client from "@/lib/backend/client";
 
@@ -20,6 +21,7 @@ const ClientPage = ({
     const [address, setAddress] = useState("");
     const [postalCode, setPostalCode] = useState("");
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+    const [showCompletePopup, setShowCompletePopup] = useState(false);
 
     useEffect(() => {
         const formattedData = responseBody.map((item) => ({
@@ -69,11 +71,11 @@ const ClientPage = ({
         };
 
         try {
-            console.log("test", requestBody);
             const response = await client.POST("/order", {
                 body: requestBody, // requestBody를 body 속성에 전달
             });
             console.log("주문이 성공적으로 전송되었습니다:", response);
+            setShowCompletePopup(true);
         } catch (error) {
             console.error("주문 전송 중 오류 발생:", error);
             alert("주문 전송에 실패했습니다. 다시 시도해 주세요.");
@@ -103,6 +105,9 @@ const ClientPage = ({
                     onClose={() => setShowConfirmPopup(false)}
                     onConfirm={handleConfirm}
                 />
+            )}
+            {showCompletePopup && (
+                <OrderCompletePopup onClose={() => setShowCompletePopup(false)} />
             )}
         </div>
     );
