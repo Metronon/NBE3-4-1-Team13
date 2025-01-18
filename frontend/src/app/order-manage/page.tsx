@@ -1,38 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClientPage from "./ClientPage";
 import ManagePopup from "./ManagePopup";
+import client from "@/lib/backend/client";
 import "./page.css";
 
 export default function OrderManage() {
-    const [showPopup, setShowPopup] = useState(false);
-    const [showManagePopup, setShowManagePopup] = useState(false);
-    const [email, setEmail] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [showManagePopup, setShowManagePopup] = useState(false);
+  const [email, setEmail] = useState("");
+  const [menus, setMenus] = useState([]);
 
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
+  useEffect(() => {
+    const fetchMenus = async () => {
+      const response = await client.GET("/menu");
+
+      console.log(response.data.data);
+
+      setMenus(response.data.data);
     };
 
-    const toggleManagePopup = () => {
-        setShowManagePopup(!showManagePopup);
-    };
+    fetchMenus();
+  });
 
-    const handleEmailSubmit = (submittedEmail) => {
-        setEmail(submittedEmail);
-        toggleManagePopup();
-    };
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
-    return (
-        <div>
-            <button onClick={togglePopup}>주문 관리</button>
-            {showPopup && (
-                <ClientPage
-                    onClose={togglePopup}
-                    onSubmit={handleEmailSubmit}
-                />
-            )}
-            {showManagePopup && (
-                <ManagePopup onClose={toggleManagePopup} email={email} />
-            )}
-        </div>
-    );
+  const toggleManagePopup = () => {
+    setShowManagePopup(!showManagePopup);
+  };
+
+  const handleEmailSubmit = (submittedEmail) => {
+    setEmail(submittedEmail);
+    toggleManagePopup();
+  };
+
+  return (
+    <div>
+      <button onClick={togglePopup}>주문 관리</button>
+      {showPopup && (
+        <ClientPage onClose={togglePopup} onSubmit={handleEmailSubmit} />
+      )}
+      {showManagePopup && (
+        <ManagePopup onClose={toggleManagePopup} email={email} menus={menus} />
+      )}
+    </div>
+  );
 }
