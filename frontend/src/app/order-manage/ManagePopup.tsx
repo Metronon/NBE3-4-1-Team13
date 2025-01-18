@@ -33,12 +33,13 @@ const ManagePopup = ({ onClose, email }) => {
                   cnt = newData[i].menuData[k].menuCount;
               }
               if (newData[i].menuCount.length < menuList.length) {
-                newData[i].menuCount.push(cnt);
+                const countData = {};
+                countData.count = cnt;
+                countData.id = newData[i].orderId + "-" + email;
+                newData[i].menuCount.push(countData);
               }
             }
           }
-
-          console.log(newData);
 
           setOrders(newData); // 주문 데이터 설정
         } else {
@@ -108,7 +109,7 @@ const ManagePopup = ({ onClose, email }) => {
                   <tr key={order.orderId}>
                     <td>{order.orderId}</td>
                     {order.menuCount.map((count) => (
-                      <td key={count}>{count}</td>
+                      <td key={count.id}>{count.count}</td>
                     ))}
                     <td>{order.totalPrice.toLocaleString("KO-KR")} 원</td>
                   </tr>
