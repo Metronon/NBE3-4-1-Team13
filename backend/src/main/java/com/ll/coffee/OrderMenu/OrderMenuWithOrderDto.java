@@ -8,6 +8,12 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * 주문자 정보와 주문목록 dto
+ *
+ * @author shBaek
+ * @since 25. 1. 16
+ */
 @AllArgsConstructor
 @Getter
 @Setter
