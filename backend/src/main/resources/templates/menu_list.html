@@ -1,5 +1,7 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
-<div layout:fragment="content" class="container my-3">
+<div layout:fragment="content">
+    <div th:replace="~{navbar :: menuFragment}"></div>
+    <div class="container my-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>메뉴 관리</h2>
         <!-- 메뉴 추가 버튼 -->
@@ -32,6 +34,7 @@
     <div class="text-center mt-3">
         <a th:href="@{/list}" class="btn btn-secondary">주문 목록</a>
     </div>
+</div>
 </div>
 <!-- 삭제 버튼 누를 시 한번 더 확인하기 위한 팝업 함수 -->
 <script layout:fragment="script" type='text/javascript'>
