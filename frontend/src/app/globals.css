@@ -101,3 +101,7 @@ h1 {
 .cancel-button {
     background-color: #f78181;
 }
+
+.main-image {
+    border-radius: 35px;
+}

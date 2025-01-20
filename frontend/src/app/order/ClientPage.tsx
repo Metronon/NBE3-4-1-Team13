@@ -23,14 +23,20 @@ const ClientPage = ({
     const [showCompletePopup, setShowCompletePopup] = useState(false);
 
     useEffect(() => {
-        const formattedData = responseBody.map((item) => ({
+        const formattedData = responseBody.map((item) => {
+            const imageId = (item.menuId % 4) + 1;
+
+            return {
             menuId: item.menuId,
             menuName: item.menuName,
             menuPrice: item.menuPrice,
             menuType: item.menuType,
-            image: `images/product_1.png`,
+            image: item.menuType === "커피" 
+                ? `/images/커피_${imageId}.png` 
+                : `/images/커피콩_${imageId}.png`,
             menuCount: 0,
-        }));
+        }
+        });
         setProducts(formattedData);
     }, [responseBody]);
 
