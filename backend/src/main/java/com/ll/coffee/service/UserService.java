@@ -18,6 +18,18 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     *
+     * 유저 저장
+     *
+     * @param username
+     * @param email
+     * @param password
+     * @return
+     *
+     * @author shjung
+     * @since 25. 1. 20.
+     */
     public Member save(String username, String email,  String password) {
         Member member = new Member();
         member.setUsername(username);

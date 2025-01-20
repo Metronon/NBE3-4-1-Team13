@@ -13,13 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * 나중에 이름 변경
- *
- * @author shjung
- * @since 25. 1. 14.
- */
+
 @RestController
 @AllArgsConstructor
 public class AdminController {

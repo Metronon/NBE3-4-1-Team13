@@ -234,7 +234,7 @@ public class AdminControllerTest {
 
         ResultActions resultActions = mvc.perform(get("/order-menu")).andDo(print());
 
-        int expectedTotalPrice = (4000*1) + (1500*2) + (5000*1) + (4500*3);
+        int expectedTotalPrice = (4000) + (1500*2) + (5000) + (4500*3);
 
 
         resultActions

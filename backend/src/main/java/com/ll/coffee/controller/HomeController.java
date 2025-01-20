@@ -20,10 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-///**
-// * @author shjung
-// * @since 25. 1. 13.
-// */
+
 @RequiredArgsConstructor
 @Controller
 public class HomeController {
