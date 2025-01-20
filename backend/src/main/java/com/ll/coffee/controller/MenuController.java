@@ -1,7 +1,6 @@
 package com.ll.coffee.controller;
 
 import com.ll.coffee.global.RsData;
-import com.ll.coffee.menu.Menu;
 import com.ll.coffee.menu.MenuDto;
 import com.ll.coffee.service.MenuService;
 import lombok.RequiredArgsConstructor;
