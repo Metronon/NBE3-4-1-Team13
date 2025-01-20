@@ -93,9 +93,8 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/menu/{id}/edit")
     public String showModifyPage(@PathVariable Long id, Model model, MenuDto menuDto) {
-
-        Menu menu = menuService.getMenuById(id);
-        model.addAttribute("menu", menu);
+        MenuDto menudto = menuService.getMenuById(id);
+        model.addAttribute("menu", menudto);
         return "menu_modify";//menu_modify.html 뷰 반환
     }
 
@@ -114,4 +113,3 @@ public class HomeController {
     }
 
 }
-
