@@ -1,6 +1,8 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<div layout:fragment="content" class="container my-3">
+<div layout:fragment="content">
+    <div th:replace="~{navbar :: navbarFragment}"></div>
+    <div class="container my-3">
     <!-- 주문자 -->
     <h2 class="border-bottom py-2" th:text="${orderMenuWithOrderDto.email}"></h2>
     <!-- 주문 상세 내역 -->
@@ -51,5 +53,6 @@
     <div class="text-center mt-3">
         <a th:href="@{/list}" class="btn btn-secondary">주문 목록</a>
     </div>
+</div>
 </div>
 </html>

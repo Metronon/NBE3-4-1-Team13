@@ -2,7 +2,7 @@
 border-bottom" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container-fluid">
         <!-- 홈페이지로 이동하는 로고 링크 -->
-        <a th:href="@{/home}" class="navbar-brand">
+        <a th:href="@{/list}" class="navbar-brand">
             <img src="/images/coffee2.png" alt="coffee" width="120" height="40">
         </a>
         <div class="d-flex align-items-center ms-auto" id="navbarSupportedContent">
@@ -10,6 +10,24 @@ border-bottom" xmlns:sec="http://www.w3.org/1999/xhtml">
             <a class="btn btn-secondary btn-sm nav-link me-3" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
             <!-- 메뉴 관리 페이지로 이동하는 버튼 -->
              <a class="btn btn-outline-primary btn-sm me-3" th:href="@{/menu/manage}">메뉴 관리</a>
+            <!-- 현재 시간을 표시하는 영역 -->
+            <span class="text-dark" id="current_time"></span>
+        </div>
+    </div>
+</nav>
+
+<nav th:fragment ="menuFragment" class="navbar navbar-expand-lg navbar-light bg-light
+border-bottom" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="container-fluid">
+        <!-- 홈페이지로 이동하는 로고 링크 -->
+        <a th:href="@{/list}" class="navbar-brand">
+            <img src="/images/coffee2.png" alt="coffee" width="120" height="40">
+        </a>
+        <div class="d-flex align-items-center ms-auto" id="navbarSupportedContent">
+            <!-- 로그인 상태에서만 보이는 로그아웃 버튼 -->
+            <a class="btn btn-secondary btn-sm nav-link me-3" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+            <!-- 메뉴 관리 페이지로 이동하는 버튼 -->
+            <a class="btn btn-outline-primary btn-sm me-3" th:href="@{/list}">주문 목록</a>
             <!-- 현재 시간을 표시하는 영역 -->
             <span class="text-dark" id="current_time"></span>
         </div>
