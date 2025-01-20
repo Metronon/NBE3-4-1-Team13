@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -58,9 +57,5 @@ public class OrderService {
      */
     public Optional<Order> findLatest() {
         return orderRepository.findFirstByOrderByIdDesc();
-    }
-
-    public List<Order> findByEmail(String email) {
-        return orderRepository.findByEmail(email);
     }
 }
