@@ -1,6 +1,7 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
     <h2>메뉴 수정</h2>
+    <!-- 메뉴 수정 폼 -->
     <form th:action="@{|/menu/${menu.id}/edit|}" th:object="${menu}" method="post" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="menuName" class="form-label">메뉴명</label>
