@@ -246,7 +246,7 @@ public class OrderMenuService {
         LocalDateTime today = LocalDateTime.now().toLocalDate().atTime(14, 0);
         LocalDateTime yesterday = today.minusDays(1);
 
-        boolean isAfter2pm = orderTime.isAfter(today);
+        boolean isAfter2pm = today.isAfter(orderTime);
         boolean isComplete = yesterday.isAfter(orderTime);
 
         return OrderMenuWithOrderDto.builder()
