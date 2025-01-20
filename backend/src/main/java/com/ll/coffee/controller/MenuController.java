@@ -17,7 +17,7 @@ import java.util.List;
 public class MenuController {
     private final MenuService menuService;
 
-    // 메뉴 추가
+    // 메뉴 추가 API
     @PostMapping
     public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody MenuDto menu) {
         // 메뉴 추가 작업
@@ -34,7 +34,7 @@ public class MenuController {
         return new ResponseEntity<>(rsData, HttpStatus.CREATED); // 상태 코드 201(CREATED)
     }
 
-    //메뉴 조회
+    //메뉴 조회 API
     @GetMapping
     public ResponseEntity<RsData<List<MenuDto>>> getAllMenus() {
         List<MenuDto> menuDtos = menuService.getAllMenus();
@@ -49,6 +49,21 @@ public class MenuController {
         return new ResponseEntity<>(rsData, HttpStatus.OK);
     }
 
+    // 특정 ID에 해당하는 메뉴를 조회하는 API
+    @GetMapping("/{menu_id}")
+    public ResponseEntity<RsData<MenuDto>> getMenuById(@PathVariable Long menu_id) {
+        //메뉴 조회 작업
+        MenuDto menuDto= menuService.getMenuById(menu_id);
+        // RsData로 감싸서 응답 생성
+        RsData<MenuDto> rsData = new RsData<>(
+                "200-1", // 조회 성공
+                "메뉴가 성공적으로 조회되었습니다.",
+                menuDto
+        );
+        return new ResponseEntity<>(rsData, HttpStatus.OK);
+    }
+
+    //메뉴 수정 API
     @PutMapping("/{menu_id}")
     public ResponseEntity<RsData<MenuDto>> updateMenu(@PathVariable Long menu_id, @RequestBody MenuDto updateMenu) {
         MenuDto updatedMenuDto = menuService.updateMenu(menu_id, updateMenu);
@@ -62,7 +77,7 @@ public class MenuController {
         return new ResponseEntity<>(rsData, HttpStatus.OK);
     }
 
-    //메뉴 삭제
+    //메뉴 삭제 API
     @DeleteMapping("/{menu_id}")
     public ResponseEntity<RsData<Void>> deleteMenu(@PathVariable Long menu_id) {
         // 메뉴 삭제 작업
@@ -78,10 +93,6 @@ public class MenuController {
         return new ResponseEntity<>(rsData, HttpStatus.OK); // 상태 코드 200(OK)
     }
 
-    @GetMapping("/{menu_id}")
-    public Menu getMenuById(@PathVariable Long menu_id) {
-        return menuService.getMenuById(menu_id);
-    }
 
 
 }
