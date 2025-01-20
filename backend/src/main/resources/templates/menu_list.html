@@ -5,7 +5,7 @@
         <!-- 메뉴 추가 버튼 -->
         <a th:href="@{/menu/add}" class="btn btn-primary">메뉴 추가</a>
     </div>
-    <!-- 현재 메뉴 테이블로 출력(메뉴 우측에 수정/삭제 버튼 -->
+    <!-- 현재 메뉴 테이블로 출력(메뉴 우측에 수정/삭제 버튼) -->
     <table class="table table-striped table-bordered">
         <thead class="table table-light text-dark">
         <tr>
@@ -33,6 +33,7 @@
         <a th:href="@{/list}" class="btn btn-secondary">주문 목록</a>
     </div>
 </div>
+<!-- 삭제 버튼 누를 시 한번 더 확인하기 위한 팝업 함수 -->
 <script layout:fragment="script" type='text/javascript'>
     const delete_elements = document.getElementsByClassName("delete");
     Array.from(delete_elements).forEach(function (element) {
