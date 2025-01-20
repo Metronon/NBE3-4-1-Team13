@@ -1,5 +1,7 @@
 <html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container my-3">
+<div layout:fragment="content">
+    <div th:replace="~{navbar :: menuFragment}"></div>
+    <div class="container my-3">
     <h2>메뉴 수정</h2>
     <!-- 메뉴 수정 폼 -->
     <form th:action="@{|/menu/${menu.id}/edit|}" th:object="${menu}" method="post" class="needs-validation" novalidate>
@@ -29,5 +31,6 @@
             <a th:href="@{|/menu/manage|}" class="btn btn-secondary">취소</a>
         </div>
     </form>
+</div>
 </div>
 </html>

@@ -1,6 +1,8 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<div layout:fragment="content" class="container my-3">
+<div layout:fragment="content">
+    <div th:replace="~{navbar :: navbarFragment}"></div>
+    <div class="container my-3">
     <!-- 상단 컨트롤 영역을 flex로 정렬 -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <!-- 주문 목록 버튼 -->
@@ -63,7 +65,7 @@
         <input type="hidden" id="page" name="page" th:value="${paging.number}">
     </form>
 </div>
-
+</div>
 <script layout:fragment="script" type='text/javascript'>
     const page_elements = document.getElementsByClassName("page-link");
     Array.from(page_elements).forEach(function(element) {
