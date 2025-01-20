@@ -44,8 +44,9 @@
             <div class="badge bg-light text-dark p-3">
                 <div class="mb-2">배송 예정</div>
                 <div>
-                    <span th:if="${!orderMenuWithOrderDto.isAfter2pm}" class="text-primary">당일 배송</span>
-                    <span th:if="${orderMenuWithOrderDto.isAfter2pm}" class="text-warning">다음날 배송</span>
+                    <span th:if="${orderMenuWithOrderDto.isComplete}" class="text-primary">배송 완료</span>
+                    <span th:if="${!orderMenuWithOrderDto.isComplete && !orderMenuWithOrderDto.isAfter2pm}" class="text-primary">당일 배송</span>
+                    <span th:if="${!orderMenuWithOrderDto.isComplete && orderMenuWithOrderDto.isAfter2pm}" class="text-warning">다음날 배송</span>
                 </div>
             </div>
         </div>

@@ -26,5 +26,6 @@ public class OrderMenuWithOrderDto {
     private List<MenuDataDto> menuData;
     private LocalDateTime orderTime;
     private boolean isAfter2pm;
+    private boolean isComplete;
     private int totalPrice;
 }
