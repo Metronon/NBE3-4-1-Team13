@@ -18,7 +18,6 @@ import java.util.Comparator;
  * @author shjung
  * @since 25. 1. 14.
  */
-
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {

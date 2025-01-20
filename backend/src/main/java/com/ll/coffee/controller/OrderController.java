@@ -33,6 +33,9 @@ public class OrderController {
     private final OrderMenuService orderMenuService;
     private final MenuService menuService;
 
+    /**
+     * 주문 생성 요청 시 전달 받을 데이터
+     */
     record OrderReqBody(
             @Email String email,
             @NotBlank @Length(min = 1) String address,
@@ -41,6 +44,13 @@ public class OrderController {
     ) {
     }
 
+    /**
+     * 주문 생성 메서드
+     *
+     * @param orderReqBody 주문 생성에 필요한 데이터
+     * @return 주문 정보를 포함한 ResponseEntity<RsData<OrderDto>>
+     * @author shbaek
+     */
     @PostMapping
     @Operation(summary = "주문 생성")
     public ResponseEntity<RsData<OrderDto>> create(@RequestBody @Valid OrderReqBody orderReqBody) {
@@ -67,6 +77,13 @@ public class OrderController {
     }
 
 
+    /**
+     * email에 해당하는 주문 목록 조회 메서드
+     *
+     * @param email 조회할 email
+     * @return 주문 및 메뉴 정보를 포함한 OrderMenuWithOrderDto
+     * @author shbaek
+     */
     @GetMapping
     @Operation(summary = "email로 주문 조회")
     public List<OrderMenuWithOrderDto> getOrdersByEmail(@RequestParam String email) {

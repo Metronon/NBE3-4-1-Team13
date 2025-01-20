@@ -25,6 +25,14 @@ public class UserSecurityService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    /**
+     *
+     * 유저 찾기
+     *
+     * @param username the username identifying the user whose data is required.
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> user = userRepository.findByUsername(username);

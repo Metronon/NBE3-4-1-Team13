@@ -4,7 +4,13 @@ import React from "react";
 import "./page.css";
 import "../globals.css";
 
-const ConfirmPopup = ({ onClose, onConfirm }) => {
+// 콜백 함수
+interface ConfirmPopupProps {
+    onClose: () => void;
+    onConfirm: () => void;
+}
+
+const ConfirmPopup = ({ onClose, onConfirm }: ConfirmPopupProps) => {
     return (
         <div className="popup">
             <div className="popup-inner">
