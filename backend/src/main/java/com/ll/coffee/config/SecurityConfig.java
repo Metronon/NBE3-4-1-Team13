@@ -16,14 +16,30 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
+ *
+ * 스프링 시큐리티 설정
+ *
  * @author shjung
  * @since 25. 1. 13.
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    /**
+     *
+     * 접속 url 관리
+     *
+     * @param http
+     * @return
+     * @throws Exception
+     *
+     * @author shjung
+     * @since 25. 1. 20.
+     */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -43,16 +59,45 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     *
+     * 유저 접속 관리
+     *
+     * @param authenticationConfiguration
+     * @return
+     * @throws Exception
+     *
+     * @author shjung
+     * @since 25. 1. 20.
+     */
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    /**
+     *
+     * 패스 워드 인코딩
+     *
+     * @return
+     *
+     * @author shjung
+     * @since 25. 1. 20.
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     *
+     * 외부 접속 허용
+     *
+     * @return
+     *
+     * @author shjung
+     * @since 25. 1. 20.
+     */
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -63,7 +108,7 @@ public class SecurityConfig {
         // 자격 증명 허용 설정
         configuration.setAllowCredentials(true);
         // 허용할 헤더 설정
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(List.of("*"));
         // CORS 설정을 소스에 등록
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

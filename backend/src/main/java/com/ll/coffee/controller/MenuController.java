@@ -17,24 +17,24 @@ import java.util.List;
 public class MenuController {
     private final MenuService menuService;
 
-        // 메뉴 추가
-        @PostMapping
-        public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody MenuDto menu) {
-            // 메뉴 추가 작업
-            MenuDto menuDto = menuService.addMenu(menu); // MenuDto 리턴
+    // 메뉴 추가
+    @PostMapping
+    public ResponseEntity<RsData<MenuDto>> addMenu(@RequestBody MenuDto menu) {
+        // 메뉴 추가 작업
+        MenuDto menuDto = menuService.addMenu(menu); // MenuDto 리턴
 
-            // RsData로 감싸서 응답 생성
-            RsData<MenuDto> rsData = new RsData<>(
-                    "201-1", // 201 코드로 메뉴가 생성되었음을 나타냄
-                    "%s 메뉴가 성공적으로 추가되었습니다.".formatted(menuDto.getName()),
-                    menuDto
-            );
+        // RsData로 감싸서 응답 생성
+        RsData<MenuDto> rsData = new RsData<>(
+                "201-1", // 201 코드로 메뉴가 생성되었음을 나타냄
+                "%s 메뉴가 성공적으로 추가되었습니다.".formatted(menuDto.getName()),
+                menuDto
+        );
 
-            // ResponseEntity로 감싸서 상태 코드와 함께 응답 반환
-            return new ResponseEntity<>(rsData, HttpStatus.CREATED); // 상태 코드 201(CREATED)
-        }
+        // ResponseEntity로 감싸서 상태 코드와 함께 응답 반환
+        return new ResponseEntity<>(rsData, HttpStatus.CREATED); // 상태 코드 201(CREATED)
+    }
 
-        //메뉴 조회
+    //메뉴 조회
     @GetMapping
     public ResponseEntity<RsData<List<MenuDto>>> getAllMenus() {
         List<MenuDto> menuDtos = menuService.getAllMenus();
@@ -63,25 +63,25 @@ public class MenuController {
     }
 
     //메뉴 삭제
-        @DeleteMapping("/{menu_id}")
-         public ResponseEntity<RsData<Void>> deleteMenu(@PathVariable Long menu_id) {
+    @DeleteMapping("/{menu_id}")
+    public ResponseEntity<RsData<Void>> deleteMenu(@PathVariable Long menu_id) {
         // 메뉴 삭제 작업
-            menuService.deleteMenuById(menu_id);
+        menuService.deleteMenuById(menu_id);
 
         // RsData로 감싸서 응답 생성
-             RsData<Void> rsData = new RsData<>(
-                    "200-1", // 삭제 성공
-                    "메뉴가 성공적으로 삭제되었습니다."
-              );
+        RsData<Void> rsData = new RsData<>(
+                "200-1", // 삭제 성공
+                "메뉴가 성공적으로 삭제되었습니다."
+        );
 
         // ResponseEntity로 감싸서 상태 코드와 함께 응답 반환
-              return new ResponseEntity<>(rsData, HttpStatus.OK); // 상태 코드 200(OK)
-          }
+        return new ResponseEntity<>(rsData, HttpStatus.OK); // 상태 코드 200(OK)
+    }
 
-          @GetMapping("/{menu_id}")
-          public Menu getMenuById(@PathVariable Long menu_id) {
-            return menuService.getMenuById(menu_id);
-         }
+    @GetMapping("/{menu_id}")
+    public Menu getMenuById(@PathVariable Long menu_id) {
+        return menuService.getMenuById(menu_id);
+    }
 
 
 }
