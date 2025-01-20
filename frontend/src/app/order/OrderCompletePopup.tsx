@@ -4,10 +4,15 @@ import React from "react";
 import "../globals.css";
 import { useRouter } from "next/navigation";
 
-const OrderCompletePopup = () => {
+interface OrderCompletePopupProp {
+    onClose: () => void;
+}
+
+const OrderCompletePopup = ({ onClose }: OrderCompletePopupProp) => {
     const router = useRouter();
 
     const handleConfirm = () => {
+        onClose();
         router.replace("/");
     };
 

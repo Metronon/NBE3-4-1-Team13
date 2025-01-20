@@ -104,8 +104,7 @@ export interface components {
         OrderReqBody: {
             email?: string;
             address: string;
-            /** Format: int32 */
-            postalCode: number;
+            postalCode: string;
             orders: {
                 [key: string]: number;
             };
@@ -115,8 +114,7 @@ export interface components {
             id?: number;
             email?: string;
             address?: string;
-            /** Format: int32 */
-            postalCode?: number;
+            postalCode?: string;
             orders?: {
                 [key: string]: number;
             };
@@ -132,6 +130,7 @@ export interface components {
             menuName?: string;
             /** Format: int32 */
             menuPrice?: number;
+            menuType?: string;
             /** Format: int32 */
             menuCount?: number;
         };

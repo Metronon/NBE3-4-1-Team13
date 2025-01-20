@@ -23,11 +23,11 @@ const ProductList = ({ products, updateCount }) => {
                         <button
                             className="decrease-button"
                             onClick={() => updateCount(product.menuId, -1)}
-                            disabled={product.count === 0}
+                            disabled={product.menuCount === 0}
                         >
                             -
                         </button>
-                        <span className="quantity-input">{product.count}</span>
+                        <span className="quantity-input">{product.menuCount}</span>
                         <button
                             className="increase-button"
                             onClick={() => updateCount(product.menuId, 1)}

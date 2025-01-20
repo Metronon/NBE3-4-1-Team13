@@ -40,7 +40,7 @@ const OrderInfo = ({
             setPostalCodeError("우편번호를 작성해주세요");
             return;
         }
-        
+
         // 우편번호란 자리수 확인
         const postalCodePatter = /^\d{5}$/;
         if (!postalCodePatter.test(postalCode)) {
@@ -81,9 +81,11 @@ const OrderInfo = ({
             />
 
             <h2>우편번호</h2>
-            {postalCodeError && <p className="error-message">{postalCodeError}</p>}
+            {postalCodeError && (
+                <p className="error-message">{postalCodeError}</p>
+            )}
             <input
-                type="number"
+                type="string"
                 placeholder="우편번호를 입력해주세요"
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
@@ -96,7 +98,9 @@ const OrderInfo = ({
             <span className="order-total">
                 총 금액 {totalPrice.toLocaleString("en-US")}원
             </span>
-            <button type="button" onClick={handlePayment}>결제하기</button>
+            <button type="button" onClick={handlePayment}>
+                결제하기
+            </button>
         </div>
     );
 };

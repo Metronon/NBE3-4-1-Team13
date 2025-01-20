@@ -14,7 +14,7 @@ interface Menu {
 export default async function Page() {
   const response = await client.GET("/menu");
 
-  const menuData = response.data.data!!;
+  const menuData = response.data!.data!!;
 
   const formattedMenuData: Menu[] = menuData.map((item: any) => ({
     menuId: item.id,
