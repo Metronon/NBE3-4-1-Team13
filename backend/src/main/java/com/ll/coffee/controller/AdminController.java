@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * 전체 주문 조회 Controller
+ * @author seeyeon
+ * @since 25. 1. 14.
+ */
+
 @RestController
 @AllArgsConstructor
 public class AdminController {
