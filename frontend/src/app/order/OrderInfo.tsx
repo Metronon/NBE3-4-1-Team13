@@ -3,7 +3,19 @@
 import React, { useState } from "react";
 import "./page.css";
 
-const OrderInfo = ({
+// 매개 변수 타입 명시
+interface OrderInfoProps {
+    email: string;
+    setEmail: (email: string) => void;
+    address: string;
+    setAddress: (address: string) => void;
+    postalCode: string;
+    setPostalCode: (postalCode: string) => void;
+    totalPrice: number;
+    onConfirm: () => void;
+}
+
+const OrderInfo= ({
     email,
     setEmail,
     address,
@@ -12,7 +24,7 @@ const OrderInfo = ({
     setPostalCode,
     totalPrice,
     onConfirm,
-}) => {
+} : OrderInfoProps) => {
     const [emailError, setEmailError] = useState("");
     const [addressError, setAddressError] = useState("");
     const [postalCodeError, setPostalCodeError] = useState("");
@@ -22,8 +34,8 @@ const OrderInfo = ({
         setAddressError("");
         setPostalCodeError("");
 
-        // 이메일란 형식 및 공백 확인
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // 이메일란 정규표현식 및 공백 확인
+        const emailPattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
         if (!emailPattern.test(email) || !email) {
             setEmailError("올바른 이메일 주소를 작성해주세요");
             return;
@@ -40,10 +52,10 @@ const OrderInfo = ({
             setPostalCodeError("우편번호를 작성해주세요");
             return;
         }
-        
+
         // 우편번호란 자리수 확인
-        const postalCodePatter = /^\d{5}$/;
-        if (!postalCodePatter.test(postalCode)) {
+        const postalCodePattern = /^\d{5}$/;
+        if (!postalCodePattern.test(postalCode)) {
             setPostalCodeError("우편번호는 5자리 숫자여야 합니다.");
             return;
         }
@@ -81,9 +93,11 @@ const OrderInfo = ({
             />
 
             <h2>우편번호</h2>
-            {postalCodeError && <p className="error-message">{postalCodeError}</p>}
+            {postalCodeError && (
+                <p className="error-message">{postalCodeError}</p>
+            )}
             <input
-                type="number"
+                type="string"
                 placeholder="우편번호를 입력해주세요"
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
@@ -96,7 +110,9 @@ const OrderInfo = ({
             <span className="order-total">
                 총 금액 {totalPrice.toLocaleString("en-US")}원
             </span>
-            <button type="button" onClick={handlePayment}>결제하기</button>
+            <button type="button" onClick={handlePayment}>
+                결제하기
+            </button>
         </div>
     );
 };

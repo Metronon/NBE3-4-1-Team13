@@ -9,14 +9,13 @@ import OrderCompletePopup from "./OrderCompletePopup";
 import type { components } from "@/lib/backend/apiV1/schema";
 import client from "@/lib/backend/client";
 
+// MenuDataDto : Menu의 Id, Name, Price, Count
 const ClientPage = ({
     responseBody,
 }: {
     responseBody: components["schemas"]["MenuDataDto"][];
 }) => {
-    const [products, setProducts] = useState<
-        components["schemas"]["MenuDataDto"][]
-    >([]);
+    const [products, setProducts] = useState<components["schemas"]["MenuDataDto"][]>([]);
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [postalCode, setPostalCode] = useState("");
@@ -30,37 +29,47 @@ const ClientPage = ({
             menuPrice: item.menuPrice,
             menuType: item.menuType,
             image: `images/product_1.png`,
-            count: 0, // 초기화
+            menuCount: 0,
         }));
         setProducts(formattedData);
     }, [responseBody]);
 
-    const updateCount = (id: number, setCount: number) => {
+    // 상품 수량 수정
+    const updateCount = (id: number, setMenuCount: number) => {
         setProducts(
             products.map((product) =>
                 product.menuId === id
-                    ? { ...product, count: product.count + setCount }
+                    ? { ...product, menuCount: product.menuCount! + setMenuCount }
                     : product
             )
         );
     };
 
+    // 총 가격 계산
     const totalPrice = useMemo(
         () =>
             products.reduce(
-                (sum, product) => sum + product.menuPrice * product.count,
+                (sum, product) => sum + product.menuPrice! * product.menuCount!,
                 0
             ),
         [products]
     );
 
-    const filteredProducts = products.filter((product) => product.count > 0);
+    const filteredProducts = products.filter((product) => product.menuCount! > 0);
 
     // ConfirmPopup에서 "네"를 눌렀을때 POST 요청
     const handleConfirm = async () => {
         const orders: Record<number, number> = {};
+
+        if (filteredProducts.length === 0) {
+            alert("상품을 최소 1개 이상 선택해야 합니다.");
+            return;
+        }
+
         filteredProducts.forEach((product) => {
-            orders[product.menuId] = product.count;
+            if (product.menuId !== undefined) {
+                orders[product.menuId] = product.menuCount!;
+            }
         });
 
         const requestBody = {
@@ -72,7 +81,7 @@ const ClientPage = ({
 
         try {
             const response = await client.POST("/order", {
-                body: requestBody, // requestBody를 body 속성에 전달
+                body: requestBody,
             });
             console.log("주문이 성공적으로 전송되었습니다:", response);
             setShowCompletePopup(true);
@@ -107,10 +116,13 @@ const ClientPage = ({
                 />
             )}
             {showCompletePopup && (
-                <OrderCompletePopup onClose={() => setShowCompletePopup(false)} />
+                <OrderCompletePopup
+                    onClose={() => setShowCompletePopup(false)}
+                />
             )}
         </div>
     );
 };
 
 export default ClientPage;
+
