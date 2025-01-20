@@ -43,6 +43,13 @@ public class MenuService {
         return new MenuDto(savedMenu.getId(),savedMenu.getName(),savedMenu.getType(),savedMenu.getPrice()
         );
     }
+    public void deleteMenuById(Long id) {
+        if (menuRepository.existsById(id)) {
+            menuRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Menu not found with id " + id);
+        }
+    }
 
     // 주어진 ID에 해당하는 메뉴를 조회하고 MenuDto로 변환하여 반환
     public MenuDto getMenuById(Long id) {
