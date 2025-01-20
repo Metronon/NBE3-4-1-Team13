@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * @author shbaek
+ * 전체 주문조회를 위한 Repository
+ * @author seeyeon
  * @since 25. 1. 15
  */
 public interface OrderMenuRepository extends JpaRepository<OrderMenu, OrderMenuId> {
