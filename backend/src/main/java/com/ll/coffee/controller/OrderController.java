@@ -3,7 +3,7 @@ package com.ll.coffee.controller;
 import com.ll.coffee.OrderMenu.OrderMenuWithOrderDto;
 import com.ll.coffee.global.RsData;
 import com.ll.coffee.global.ServiceException;
-import com.ll.coffee.menu.Menu;
+import com.ll.coffee.menu.MenuDto;
 import com.ll.coffee.order.Order;
 import com.ll.coffee.order.OrderDto;
 import com.ll.coffee.service.MenuService;
@@ -11,7 +11,10 @@ import com.ll.coffee.service.OrderMenuService;
 import com.ll.coffee.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
@@ -55,7 +58,7 @@ public class OrderController {
     @Operation(summary = "주문 생성")
     public ResponseEntity<RsData<OrderDto>> create(@RequestBody @Valid OrderReqBody orderReqBody) {
         orderReqBody.orders.forEach((menuId, count) -> {
-            Menu menu = menuService.getMenuById(menuId);
+            MenuDto menu = menuService.getMenuById(menuId);
 
             if (menuId == null) {
                 throw new ServiceException("400-2", "메뉴를 확인해주세요.");

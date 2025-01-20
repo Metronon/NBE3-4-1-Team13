@@ -94,7 +94,7 @@ public class HomeController {
     @GetMapping("/menu/{id}/edit")
     public String showModifyPage(@PathVariable Long id, Model model, MenuDto menuDto) {
 
-        Menu menu = menuService.getMenuById(id);
+        MenuDto menu = menuService.getMenuById(id);
         model.addAttribute("menu", menu);
         return "menu_modify";//menu_modify.html 뷰 반환
     }
