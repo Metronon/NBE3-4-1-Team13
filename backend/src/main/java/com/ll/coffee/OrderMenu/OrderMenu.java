@@ -6,6 +6,12 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import lombok.*;
 
+/**
+ * 주문한 메뉴 테이블
+ * @author seeyeon
+ * @since 25. 1. 15
+ */
+
 @Entity
 @Getter
 @Setter

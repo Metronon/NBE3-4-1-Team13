@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * OrderMenu 테이블 복합키 정의
+ * @author seeyeon
+ * @since 25. 1. 15
+ */
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderMenuId implements Serializable {
