@@ -146,10 +146,10 @@ body {
     padding: 0 15px;
 }
 
-.order-detail-notice {
+.product-notice {
+    align-self: center;
     font-size: 24px;
     font-weight: bold;
-    align-self: center;
     text-align: center;
 }
 

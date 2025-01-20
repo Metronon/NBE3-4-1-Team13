@@ -9,6 +9,8 @@ interface Menu {
   menuName: string;
   menuType: string;
   menuPrice: number;
+  image: string;
+  menuCount: number;
 }
 
 export default async function Page() {
@@ -16,12 +18,22 @@ export default async function Page() {
 
   const menuData = response.data!.data!!;
 
-  const formattedMenuData: Menu[] = menuData.map((item: any) => ({
-    menuId: item.id,
-    menuName: item.name,
-    menuPrice: item.price,
-    menuType: item.type,
-  }));
+  const formattedMenuData: Menu[] = menuData.map((item: any) => {
+    const imageId = item.id % 4;
+
+    const image = item.type === "커피"
+      ? `/images/coffee_${imageId}.png`
+      : `/images/커피콩_${imageId}.png`;
+
+    return {
+      menuId: item.id,
+      menuName: item.name,
+      menuPrice: item.price,
+      menuType: item.type,
+      image: image,
+      menuCount: 0,
+    };
+  });
 
   return (
     <>

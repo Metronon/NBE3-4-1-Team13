@@ -2,11 +2,23 @@
 
 import React from "react";
 
-const OrderDetail = ({ filteredProducts }) => {
+interface Product {
+    menuId: number;
+    menuName: string;
+    menuPrice: number;
+    menuCount: number;
+    image: string;
+}
+
+interface OrderDetailProps {
+    filteredProducts: Product[]; // Product의 타입 명시로 결정
+}
+
+const OrderDetail = ({ filteredProducts } : OrderDetailProps) => {
     return (
         <div className="order-detail">
             {filteredProducts.length === 0 ? (
-                <p className="order-detail-notice">장바구니가 비어있습니다</p>
+                <p className="product-notice">장바구니가 비어있습니다</p>
             ) : (
                 filteredProducts.map((product) => (
                     <div key={product.menuId} className="order-item">
