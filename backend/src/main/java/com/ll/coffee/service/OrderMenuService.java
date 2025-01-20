@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author shbaek
+ * 전체 주문 조회
+ * @author seeyeon
  * @since 25. 1. 15
  */
 @Service
@@ -73,11 +74,11 @@ public class OrderMenuService {
                 }
             }
 
-            // 4. 주문 시간과 오후 2시 이후 여부 계산
+            // 주문 시간과 오후 2시 이후 여부 계산
             LocalDateTime orderTime = order.getCreatedAt();
             boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
 
-            // 5. OrderMenuDto 생성
+            // OrderMenuDto 생성
             OrderMenuDto orderMenuDto = OrderMenuDto.builder()
                     .orderId(order.getId())
                     .menuData(menuDataList)
