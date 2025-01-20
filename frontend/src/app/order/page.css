@@ -16,7 +16,8 @@ body {
     height: calc(100vh - 80px); /* 네비게이션 바 높이 제외 */
     margin: 0 auto;
     max-width: none;
-    min-width: min-content;
+    min-width: auto;
+    padding: 0 15px;
     width: 100%;
 }
 
@@ -28,6 +29,7 @@ body {
     flex-shrink: 1;
     flex-wrap: nowrap;
     margin: 10px 5px;
+    padding: 20px;
     min-width: 0;
 }
 
@@ -36,8 +38,8 @@ body {
     flex: 2;
     flex-grow: 2;
     min-width: 1000px;
+    max-width: min-content;
     overflow-y: auto;
-    padding: 20px;
 }
 
 .order-list {
@@ -47,7 +49,6 @@ body {
     max-height: 1150px;
     min-width: 500px;
     overflow-y: auto;
-    padding: 15px;
 }
 
 .product-details {
@@ -57,7 +58,7 @@ body {
     flex-wrap: nowrap;
     gap: 20px;
     min-width: 0;
-    padding: 45px 0;
+    padding: 15px 0;
 }
 
 .product-img {
@@ -131,16 +132,25 @@ body {
 }
 
 .order-detail {
+    justify-content: center;
     background-color: #cfae90;
     border-radius: 10px;
     display: flex;
     flex: 1;
     flex-direction: column;
     gap: 20px;
-    margin-bottom: 20px;
-    max-height: 480px;
+    margin-bottom: 15px;
+    max-height: auto;
+    min-width: auto;
     overflow-y: auto;
-    padding: 15px;
+    padding: 0 15px;
+}
+
+.order-detail-notice {
+    font-size: 24px;
+    font-weight: bold;
+    align-self: center;
+    text-align: center;
 }
 
 .order-item {
@@ -192,7 +202,7 @@ body {
     font-size: 23px;
     height: 50px;
     text-align: right;
-    width: 130px;
+    width: 150px;
 }
 
 .order-info {
