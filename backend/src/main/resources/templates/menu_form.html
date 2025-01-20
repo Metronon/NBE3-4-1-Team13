@@ -1,6 +1,7 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="container my-3">
     <h2>메뉴 등록</h2>
+    <!-- 메뉴 등록 폼 -->
     <form th:action="@{/menu/add}" method="post" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="menuName" class="form-label">메뉴명</label>
