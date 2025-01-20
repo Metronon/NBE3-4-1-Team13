@@ -1,4 +1,4 @@
-const baseData = {
+/*const baseData = {
     email: "test@test.com",
     address: "테스트",
     postalCode: "11111",
@@ -57,4 +57,4 @@ const currentTime = new Date();
 const currentHour = currentTime.getHours();
 baseData.after2pm = currentHour >= 14;
 
-export default baseData;
+export default baseData;*/
