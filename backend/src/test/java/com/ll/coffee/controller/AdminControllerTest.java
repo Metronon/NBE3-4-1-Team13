@@ -64,7 +64,7 @@ public class AdminControllerTest {
         Order order = Order.builder()
                 .email("test@example.com")
                 .address("TestAddress")
-                .postalCode(12345)
+                .postalCode("12345")
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -177,7 +177,7 @@ public class AdminControllerTest {
             Order order = Order.builder()
                     .email("test@example.com")
                     .address("TestAddress")
-                    .postalCode(12345)
+                    .postalCode("12345")
                     .createdAt(LocalDateTime.now())
                     .build();
 
@@ -207,7 +207,7 @@ public class AdminControllerTest {
         Order order = Order.builder()
                 .email("test@example.com")
                 .address("TestAddress")
-                .postalCode(12345)
+                .postalCode("12345")
                 .createdAt(LocalDateTime.now())
                 .build();
 

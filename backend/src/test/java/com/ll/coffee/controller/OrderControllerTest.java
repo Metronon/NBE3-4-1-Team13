@@ -76,7 +76,7 @@ public class OrderControllerTest {
     void t2() throws Exception {
         String email = "test@test.com";
 
-        Order testOrder = orderService.save(email, "주소", 12345, Map.of(1L, 2, 2L, 1));
+        Order testOrder = orderService.save(email, "주소", "12345", Map.of(1L, 2, 2L, 1));
 
         ResultActions resultActions = mvc
                 .perform(
@@ -91,7 +91,7 @@ public class OrderControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[-1].email").value(email))
                 .andExpect(jsonPath("$[-1].address").value("주소"))
-                .andExpect(jsonPath("$[-1].postalCode").value(12345))
+                .andExpect(jsonPath("$[-1].postalCode").value("12345"))
         ;
     }
 }

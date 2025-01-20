@@ -16,7 +16,7 @@ public class OrderMenuWithOrderDto {
     private Long orderId;
     private String email;
     private String address;
-    private int postalCode;
+    private String postalCode;
     private List<MenuDataDto> menuData;
     private LocalDateTime orderTime;
     private boolean isAfter2pm;

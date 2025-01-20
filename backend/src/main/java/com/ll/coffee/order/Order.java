@@ -34,7 +34,7 @@ public class Order {
 
     private String address;
 
-    private int postalCode;
+    private String postalCode;
 
     @CreatedDate
     private LocalDateTime createdAt;

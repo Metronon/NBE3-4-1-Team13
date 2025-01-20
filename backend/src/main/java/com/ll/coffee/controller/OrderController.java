@@ -11,10 +11,7 @@ import com.ll.coffee.service.OrderMenuService;
 import com.ll.coffee.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
@@ -38,8 +35,8 @@ public class OrderController {
 
     record OrderReqBody(
             @Email String email,
-            @NotBlank @Length(min = 2) String address,
-            @NotNull @Min(1) int postalCode,
+            @NotBlank @Length(min = 1) String address,
+            @NotBlank @Pattern(regexp = "\\d{5}", message = "우편번호는 5자리 숫자여야 합니다.") String postalCode,
             @NotNull Map<Long, Integer> orders
     ) {
     }

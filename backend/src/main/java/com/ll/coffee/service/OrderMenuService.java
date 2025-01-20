@@ -61,6 +61,7 @@ public class OrderMenuService {
                             .menuId(menu.getId())
                             .menuName(menu.getName())
                             .menuPrice(menu.getPrice())
+                            .menuType(menu.getType())
                             .menuCount(orderMenu.getCount())
                             .build();
 
@@ -116,12 +117,12 @@ public class OrderMenuService {
                 if (menuOptional.isPresent()) {
                     Menu menu = menuOptional.get();
 
-
                     // 메뉴 데이터 DTO로 변환
                     MenuDataDto menuDataDto = MenuDataDto.builder()
                             .menuId(menu.getId())
                             .menuName(menu.getName())
                             .menuPrice(menu.getPrice())
+                            .menuType(menu.getType())
                             .menuCount(orderMenu.getCount())
                             .build();
 

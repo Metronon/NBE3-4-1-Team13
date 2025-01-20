@@ -28,7 +28,7 @@ public class OrderService {
      * @author shbaek
      * @since 25. 1. 15
      */
-    public Order save(String email, String address, int postalCode, Map<Long, Integer> orders) {
+    public Order save(String email, String address, String postalCode, Map<Long, Integer> orders) {
         Order order = new Order();
         order.setEmail(email);
         order.setAddress(address);
