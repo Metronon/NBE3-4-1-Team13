@@ -17,16 +17,16 @@
                     <thead class="table-light">
                     <tr>
                         <th>메뉴명</th>
-                        <th class="text-end">단가</th>
                         <th class="text-center">수량</th>
+                        <th class="text-end">단가</th>
                     </tr>
                     </thead>
                     <tbody>
                     <!-- 메뉴 목록 -->
                     <tr th:each="menu : ${orderMenuWithOrderDto.menuData}">
                         <td th:text="${menu.menuName}"></td>
-                        <td class="text-end" th:text="${#numbers.formatInteger(menu.menuPrice, 0, 'COMMA') + '원'}"></td>
                         <td class="text-center" th:text="${menu.menuCount + '개'}"></td>
+                        <td class="text-end" th:text="${#numbers.formatInteger(menu.menuPrice, 0, 'COMMA') + '원'}"></td>
                     </tr>
                     <!-- 총액 행 -->
                     <tr class="table-secondary">
