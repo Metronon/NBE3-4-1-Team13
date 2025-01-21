@@ -189,7 +189,11 @@ public class OrderMenuService {
             }
 
             LocalDateTime orderTime = order.getCreatedAt();
-            boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
+            LocalDateTime today = LocalDateTime.now().toLocalDate().atTime(14, 0);
+            LocalDateTime yesterday = today.minusDays(1);
+
+            boolean isAfter2pm = orderTime.isAfter(today);
+            boolean isComplete = yesterday.isAfter(orderTime);
 
             OrderMenuWithOrderDto orderMenuWithOrderDto = OrderMenuWithOrderDto.builder()
                     .orderId(order.getId())
@@ -200,6 +204,7 @@ public class OrderMenuService {
                     .orderTime(orderTime)
                     .isAfter2pm(isAfter2pm)
                     .totalPrice(totalPrice)
+                    .isComplete(isComplete)
                     .build();
 
             orderMenuWithOrderDtos.add(orderMenuWithOrderDto);
@@ -238,7 +243,11 @@ public class OrderMenuService {
         }
 
         LocalDateTime orderTime = order.getCreatedAt();
-        boolean isAfter2pm = orderTime.toLocalTime().isAfter(LocalTime.of(14,0));
+        LocalDateTime today = LocalDateTime.now().toLocalDate().atTime(14, 0);
+        LocalDateTime yesterday = today.minusDays(1);
+
+        boolean isAfter2pm = orderTime.isAfter(today);
+        boolean isComplete = yesterday.isAfter(orderTime);
 
         return OrderMenuWithOrderDto.builder()
                 .orderId(order.getId())
@@ -249,6 +258,7 @@ public class OrderMenuService {
                 .orderTime(orderTime)
                 .isAfter2pm(isAfter2pm)
                 .totalPrice(totalPrice)
+                .isComplete(isComplete)
                 .build();
     }
 }
